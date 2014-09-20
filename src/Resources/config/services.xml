@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <!-- Classes -->
+    <parameter key="phpmentors_pageflower.conversation_bag.class">PHPMentors\PageflowerBundle\Session\ConversationBag</parameter>
+    <parameter key="phpmentors_pageflower.conversation_context.class">PHPMentors\PageflowerBundle\Conversation\ConversationContext</parameter>
+    <parameter key="phpmentors_pageflower.conversation_listener.class">PHPMentors\PageflowerBundle\EventListener\ConversationListener</parameter>
+    <parameter key="phpmentors_pageflower.conversation_repository.class">PHPMentors\PageflowerBundle\Conversation\ConversationRepository</parameter>
+    <parameter key="phpmentors_pageflower.conversational_global_variables.class">PHPMentors\PageflowerBundle\Templating\ConversationalGlobalVariables</parameter>
+    <parameter key="phpmentors_pageflower.conversational_session.class">PHPMentors\PageflowerBundle\Session\ConversationalSession</parameter>
+    <parameter key="phpmentors_pageflower.form_type_conversation_extension.class">PHPMentors\PageflowerBundle\Form\Extension\Conversation\Type\FormTypeConversationExtension</parameter>
+    <parameter key="phpmentors_pageflower.pageflow.class">PHPMentors\PageflowerBundle\Pageflow\Pageflow</parameter>
+    <parameter key="phpmentors_pageflower.pageflow_builder.class">PHPMentors\PageflowerBundle\Pageflow\PageflowBuilder</parameter>
+    <parameter key="phpmentors_pageflower.pageflow_repository.class">PHPMentors\PageflowerBundle\Pageflow\PageflowRepository</parameter>
+    <parameter key="phpmentors_pageflower.reflection_conversational_controller.class">PHPMentors\PageflowerBundle\Controller\ReflectionConversationalController</parameter>
+    <parameter key="phpmentors_pageflower.reflection_conversational_controller_repository.class">PHPMentors\PageflowerBundle\Controller\ReflectionConversationalControllerRepository</parameter>
+    <!-- Configuration parameters -->
+    <parameter key="phpmentors_pageflower.conversation_request_parameter_name"/>
+    <parameter key="phpmentors_pageflower.conversation_session_storage_key"/>
+  </parameters>
+  <services>
+    <service id="phpmentors_pageflower.conversation_bag" class="%phpmentors_pageflower.conversation_bag.class%">
+      <argument>%phpmentors_pageflower.conversation_session_storage_key%</argument>
+    </service>
+    <service id="phpmentors_pageflower.conversation_context" class="%phpmentors_pageflower.conversation_context.class%">
+      <argument>%phpmentors_pageflower.conversation_request_parameter_name%</argument>
+      <argument type="service" id="router"/>
+    </service>
+    <service id="phpmentors_pageflower.conversation_listener" class="%phpmentors_pageflower.conversation_listener.class%">
+      <argument type="service" id="phpmentors_pageflower.conversation_repository"/>
+      <argument type="service" id="phpmentors_pageflower.pageflow_repository"/>
+      <argument type="service" id="phpmentors_pageflower.reflection_conversational_controller_repository"/>
+      <argument type="service" id="security.secure_random"/>
+      <call method="setConversationContext">
+        <argument type="service" id="phpmentors_pageflower.conversation_context"/>
+      </call>
+      <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController"/>
+      <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse"/>
+    </service>
+    <service id="phpmentors_pageflower.conversation_repository" class="%phpmentors_pageflower.conversation_repository.class%"/>
+    <service id="phpmentors_pageflower.conversational_session" class="%phpmentors_pageflower.conversational_session.class%">
+      <argument type="service" id="session.storage"/>
+      <argument type="service" id="session.attribute_bag"/>
+      <argument type="service" id="session.flash_bag"/>
+      <argument type="service" id="phpmentors_pageflower.conversation_bag"/>
+    </service>
+    <service id="phpmentors_pageflower.conversational_global_variables" class="%phpmentors_pageflower.conversational_global_variables.class%">
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="phpmentors_pageflower.pageflow" class="%phpmentors_pageflower.pageflow.class%" abstract="true" factory-service="phpmentors_pageflower.pageflow_builder" factory-method="getStateMachine"/>
+    <service id="phpmentors_pageflower.pageflow_builder" class="%phpmentors_pageflower.pageflow_builder.class%" abstract="true"/>
+    <service id="phpmentors_pageflower.pageflow_repository" class="%phpmentors_pageflower.pageflow_repository.class%"/>
+    <service id="phpmentors_pageflower.reflection_conversational_controller" class="%phpmentors_pageflower.reflection_conversational_controller.class%" abstract="true"/>
+    <service id="phpmentors_pageflower.reflection_conversational_controller_repository" class="%phpmentors_pageflower.reflection_conversational_controller_repository.class%"/>
+    <service id="phpmentors_pageflower.form_type_conversation_extension" class="%phpmentors_pageflower.form_type_conversation_extension.class%">
+      <call method="setConversationContext">
+        <argument type="service" id="phpmentors_pageflower.conversation_context"/>
+      </call>
+      <tag name="form.type_extension" alias="form"/>
+    </service>
+  </services>
+</container>

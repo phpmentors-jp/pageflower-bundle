@@ -1,0 +1,38 @@
+{
+    "name": "phpmentors/pageflower-bundle",
+    "type": "symfony-bundle",
+    "description": "A pageflow engine for Symfony applications",
+    "keywords": ["symfony", "flow", "pageflow", "stateful", "conversation"],
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "KUBO Atsuhiro",
+            "email": "kubo@iteman.jp"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "doctrine/annotations": "~1.0",
+        "phpmentors/domain-kata": "~1.0@dev",
+        "piece/stagehand-fsm": "~2.1@dev",
+        "symfony/config": "~2.3",
+        "symfony/console": "~2.3",
+        "symfony/dependency-injection": "~2.3",
+        "symfony/form": "~2.3",
+        "symfony/framework-bundle": "~2.3",
+        "symfony/http-foundation": "~2.3",
+        "symfony/http-kernel": "~2.3",
+        "symfony/routing": "~2.3",
+        "symfony/security": "~2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPMentors\\PageflowerBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

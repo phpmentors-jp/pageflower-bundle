@@ -44,7 +44,7 @@ class AppKernel extends Kernel
 
 ## Support
 
-If you find a bug or have a question, or want to request a feature, create an issue or pull request for it on [Issues](https://github.com/phpmentors/pageflower-bundle/issues).
+If you find a bug or have a question, or want to request a feature, create an issue or pull request for it on [Issues](https://github.com/phpmentors-jp/pageflower-bundle/issues).
 
 ## Copyright
 

@@ -6,9 +6,9 @@ A pageflow engine for Symfony applications
 
 ## Installation
 
-PHPMentorsPageflowerBundle can be installed using [Composer](http://getcomposer.org/).
+`PHPMentorsPageflowerBundle` can be installed using [Composer](http://getcomposer.org/).
 
-First, add the dependency to **phpmentors/pageflower-bundle** into your **composer.json** file as the following:
+First, add the dependency to `phpmentors/pageflower-bundle` into your `composer.json` file as the following:
 
 ```json
 {

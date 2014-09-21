@@ -30,7 +30,7 @@ composer update phpmentors/pageflower-bundle
 
 ## Configuration
 
-app/AppKernel.php:
+`app/AppKernel.php`:
 
 ```php
 ...

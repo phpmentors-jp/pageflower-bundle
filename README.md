@@ -6,7 +6,7 @@ A pageflow engine for Symfony applications
 
 ## Installation
 
-Composer Console can be installed using [Composer](http://getcomposer.org/).
+PHPMentorsPageflowerBundle can be installed using [Composer](http://getcomposer.org/).
 
 First, add the dependency to **phpmentors/pageflower-bundle** into your **composer.json** file as the following:
 

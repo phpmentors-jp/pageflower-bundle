@@ -16,10 +16,10 @@ namespace PHPMentors\PageflowerBundle\Annotation;
  * @Annotation
  * @Target("ANNOTATION")
  */
-final class States implements AnnotationInterface
+final class EndPage implements PageAnnotationInterface
 {
     /**
-     * @var array
+     * @var mixed
      */
     public $value;
 }

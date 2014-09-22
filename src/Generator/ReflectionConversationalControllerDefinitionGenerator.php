@@ -89,8 +89,8 @@ class ReflectionConversationalControllerDefinitionGenerator
                             if (!in_array($accept, $this->states)) {
                                 throw new \LogicException(sprintf(
                                     'The value for annotation "%s" must be a one of [ %s ], "%s" is specified.',
-                                    'PHPMentors\PageflowerBundle\Annotation\Accept',
-                                    implode(', ', $this->states),
+                                    get_class($annotation),
+                                    implode(', ', array_map(function ($stateId) { return sprintf('"%s"', $stateId); }, $this->states)),
                                     $accept
                                 ));
                             }

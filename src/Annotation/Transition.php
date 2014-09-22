@@ -16,7 +16,7 @@ namespace PHPMentors\PageflowerBundle\Annotation;
  * @Annotation
  * @Target("ANNOTATION")
  */
-final class Start implements AnnotationInterface
+final class Transition implements AnnotationInterface
 {
     /**
      * @var string

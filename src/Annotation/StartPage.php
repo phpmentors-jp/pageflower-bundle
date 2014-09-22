@@ -16,7 +16,10 @@ namespace PHPMentors\PageflowerBundle\Annotation;
  * @Annotation
  * @Target("ANNOTATION")
  */
-final class Transitions implements AnnotationInterface
+final class StartPage implements PageAnnotationInterface
 {
+    /**
+     * @var array
+     */
     public $value;
 }

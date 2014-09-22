@@ -18,11 +18,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Reference;
 
-use PHPMentors\PageflowerBundle\Annotation\AnnotationInterface;
-use PHPMentors\PageflowerBundle\Annotation\End;
-use PHPMentors\PageflowerBundle\Annotation\Start;
-use PHPMentors\PageflowerBundle\Annotation\States;
-use PHPMentors\PageflowerBundle\Annotation\Transitions;
+use PHPMentors\PageflowerBundle\Annotation\EndPage;
+use PHPMentors\PageflowerBundle\Annotation\Page;
+use PHPMentors\PageflowerBundle\Annotation\PageAnnotationInterface;
+use PHPMentors\PageflowerBundle\Annotation\StartPage;
+use PHPMentors\PageflowerBundle\Annotation\Transition;
 
 class PageflowDefinitionGenerator
 {
@@ -84,86 +84,142 @@ class PageflowDefinitionGenerator
         $pageflowBuilderDefinition = new DefinitionDecorator('phpmentors_pageflower.pageflow_builder');
         $pageflowBuilderDefinition->setArguments(array($this->controllerServiceId));
 
-        $statesFound = false;
-        $transitionsFound = false;
-        foreach ($pageflowAnnotation->value as $annotation) {
-            if ($annotation instanceof States) {
-                if ($statesFound) {
-                    throw new \LogicException(sprintf('Annotation "%s" must be specified only once.', get_class($annotation)));
-                }
-                $statesFound = true;
+        $startPageFound = false;
+        $endPageFound = false;
+        $transitions = array();
+        foreach ($pageflowAnnotation->value as $page) {
+            if (!($page instanceof PageAnnotationInterface)) {
+                throw new \LogicException(sprintf(
+                    'The value for annotation "%s" should be one of [ %s ], "%s" is specified.',
+                    get_class($pageflowAnnotation),
+                    implode(', ', array('"PHPMentors\PageflowerBundle\Annotation\Page"', '"PHPMentors\PageflowerBundle\Annotation\StartPage"', '"PHPMentors\PageflowerBundle\Annotation\EndPage"')),
+                    is_object($page) ? get_class($page) : $page
+                ));
+            }
 
-                foreach ($annotation->value as $state) {
-                    if ($state instanceof AnnotationInterface) {
-                        if ($state->value === null || strlen($state->value) == 0) {
-                            throw new \LogicException(sprintf('The value for annotation "%s" cannot be empty.', get_class($state)));
-                        }
-
-                        if ($state instanceof Start) {
-                            $pageflowBuilderDefinition->addMethodCall('addState', array($state->value));
-                            $pageflowBuilderDefinition->addMethodCall('setStartState', array($state->value));
-                            $this->states[] = $state->value;
-                        } elseif ($state instanceof End) {
-                            $pageflowBuilderDefinition->addMethodCall('addState', array($state->value));
-                            $pageflowBuilderDefinition->addMethodCall('setEndState', array($state->value, StateInterface::STATE_FINAL));
-                            $this->states[] = $state->value;
-                        } else {
-                            throw new \LogicException(sprintf(
-                                'State "%s" must be encapsulated with one of [ %s ], "%s" is specified.',
-                                $state->value,
-                                implode(', ', array('PHPMentors\PageflowerBundle\Annotation\Start', 'PHPMentors\PageflowerBundle\Annotation\End')),
-                                get_class($state)
-                            ));
-                        }
-                    } else {
-                        if ($state === null || strlen($state) == 0) {
-                            throw new \LogicException(sprintf('The value for annotation "%s" cannot be empty.', get_class($annotation)));
-                        }
-
-                        $pageflowBuilderDefinition->addMethodCall('addState', array($state));
-                        $this->states[] = $state;
+            if (($page instanceof StartPage) || ($page instanceof Page)) {
+                if ($page instanceof StartPage) {
+                    if ($startPageFound) {
+                        throw new \LogicException(sprintf('Annotation "%s" should be specified only once.', get_class($page)));
                     }
+                    $startPageFound = true;
                 }
-            } elseif ($annotation instanceof Transitions) {
-                if ($transitionsFound) {
-                    throw new \LogicException(sprintf('Annotation "%s" must be specified only once.', get_class($annotation)));
+
+                if ($page->value[0] === null) {
+                    throw new \LogicException(sprintf('The first element for annotation "%s" cannot be empty.', get_class($page)));
                 }
-                $transitionsFound = true;
 
-                foreach ($annotation->value as $transition) {
-                    if (is_array($transition) && count($transition) == 2 && is_string($transition[0]) && is_string($transition[1])) {
-                        foreach (array($transition[0], $transition[1]) as $state) {
-                            if ($state === null || strlen($state) == 0) {
-                                throw new \LogicException(sprintf('The value for annotation "%s" cannot be empty.', get_class($annotation)));
-                            }
+                if (!is_string($page->value[0])) {
+                    throw new \LogicException(sprintf('The first element for annotation "%s" should be string, "%s" is specified.', get_class($page), var_export($page->value[0], true)));
+                }
 
-                            if (!in_array($state, $this->states)) {
-                                throw new \LogicException(sprintf(
-                                    'The value for annotation "%s" must be one of [ %s ], "%s" is specified.',
-                                    get_class($annotation),
-                                    implode(', ', $this->states),
-                                    $state
-                                ));
-                            }
-                        }
+                if (empty($page->value[0])) {
+                    throw new \LogicException(sprintf('The first element for annotation "%s" cannot be empty.', get_class($page)));
+                }
 
-                        $pageflowBuilderDefinition->addMethodCall('addTransition', array($transition[0], $transition[1], $transition[1]));
-                    } else {
+                $pageflowBuilderDefinition->addMethodCall('addState', array($page->value[0]));
+                if ($page instanceof StartPage) {
+                    $pageflowBuilderDefinition->addMethodCall('setStartState', array($page->value[0]));
+                }
+
+                $this->states[] = $page->value[0];
+
+                if (count(array_slice($page->value, 1)) == 0) {
+                    throw new \LogicException(sprintf(
+                        'Annotation "%s" should be specified at least once in annotation "%s".',
+                        'PHPMentors\PageflowerBundle\Annotation\Transition',
+                        get_class($page)
+                    ));
+                }
+
+                foreach (array_slice($page->value, 1) as $transition) {
+                    if (!($transition instanceof Transition)) {
                         throw new \LogicException(sprintf(
-                            'The value for annotation "%s" must be string array, "%s" is specified.',
-                            get_class($annotation),
+                            'The second and the subsequent element for annotation "%s" should be "%s", "%s" is specified.',
+                            get_class($page),
+                            'PHPMentors\PageflowerBundle\Annotation\Transition',
                             var_export($transition, true)
                         ));
                     }
+
+                    if ($transition->value === null) {
+                        throw new \LogicException(sprintf('The value for annotation "%s" cannot be empty.', get_class($transition)));
+                    }
+
+                    if (!is_string($transition->value)) {
+                        throw new \LogicException(sprintf(
+                            'The value for annotation "%s" should be string, "%s" is specified.',
+                            get_class($transition),
+                            var_export($page->value[0], true)
+                        ));
+                    }
+
+                    if (empty($transition->value)) {
+                        throw new \LogicException(sprintf('The value for annotation "%s" cannot be empty.', get_class($transition)));
+                    }
+
+                    $transitions[] = array($page->value[0], $transition->value, $transition->value);
                 }
-            } else {
+            } elseif ($page instanceof EndPage) {
+                $endPageFound = true;
+
+                if ($page->value === null) {
+                    throw new \LogicException(sprintf('The value for annotation "%s" cannot be empty.', get_class($page)));
+                }
+
+                if (is_string($page->value)) {
+                    if (empty($page->value)) {
+                        throw new \LogicException(sprintf('The value for annotation "%s" cannot be empty.', get_class($page)));
+                    }
+
+                    $pageflowBuilderDefinition->addMethodCall('addState', array($page->value));
+                    $pageflowBuilderDefinition->addMethodCall('setEndState', array($page->value, StateInterface::STATE_FINAL));
+                    $this->states[] = $page->value;
+                } elseif (is_array($page->value)) {
+                    if (!(count($page->value) == 1 && is_string($page->value[0]))) {
+                        throw new \LogicException(sprintf(
+                            'The value for annotation "%s" should be string or single value array, "%s" is specified.',
+                            get_class($page),
+                            var_export($page->value, true)
+                        ));
+                    }
+
+                    if (empty($page->value)) {
+                        throw new \LogicException(sprintf('The value for the first element for annotation "%s" cannot be empty.', get_class($page)));
+                    }
+
+                    $pageflowBuilderDefinition->addMethodCall('addState', array($page->value[0]));
+                    $pageflowBuilderDefinition->addMethodCall('setEndState', array($page->value[0], StateInterface::STATE_FINAL));
+                    $this->states[] = $page->value[0];
+                } else {
+                    throw new \LogicException(sprintf(
+                        'The value for annotation "%s" should be string or single value array, "%s" is specified.',
+                        get_class($page),
+                        var_export($page->value, true)
+                    ));
+                }
+            }
+        }
+
+        if (!$startPageFound) {
+            throw new \LogicException(sprintf('Annotation "%s" should be specified.', 'PHPMentors\PageflowerBundle\Annotation\StartPage'));
+        }
+
+        if (!$endPageFound) {
+            throw new \LogicException(sprintf('Annotation "%s" should be specified at least once.', 'PHPMentors\PageflowerBundle\Annotation\EndPage'));
+        }
+
+        foreach ($transitions as $transition) {
+            if (!in_array($transition[2], $this->states)) {
                 throw new \LogicException(sprintf(
-                    'The value for annotation "%s" must be one of [ %s ], "%s" is specified.',
-                    get_class($pageflowAnnotation),
-                    implode(', ', array('"PHPMentors\PageflowerBundle\Annotation\States"', '"PHPMentors\PageflowerBundle\Annotation\Transitions"')),
-                    is_object($annotation) ? get_class($annotation) : $annotation
+                    'The value for annotation "%s" must be a one of [ %s ], "%s" is specified.',
+                    'PHPMentors\PageflowerBundle\Annotation\Transition',
+                    implode(', ', array_map(function ($stateId) { return sprintf('"%s"', $stateId); }, $this->states)),
+                    $transition[2]
                 ));
             }
+
+            $pageflowBuilderDefinition->addMethodCall('addTransition', $transition);
         }
 
         $pageflowBuilderServiceId = 'phpmentors_pageflower.pageflow_builder.' . $this->controllerServiceId;

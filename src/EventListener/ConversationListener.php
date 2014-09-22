@@ -128,6 +128,8 @@ class ConversationListener implements ConversationContextAwareInterface
                         $this->conversationRepository->add($conversation);
                     }
 
+                    $conversation->increaseConversationCount();
+
                     if (!isset($reflectionConversationalController)) {
                         $reflectionConversationalController = $this->reflectionConversationalControllerRepository->findByClass(get_class($conversationalController));
                         if ($reflectionConversationalController === null) {

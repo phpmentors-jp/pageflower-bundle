@@ -155,4 +155,16 @@ class ConversationContext
             return $this->conversation->getPreviousState();
         }
     }
+
+    /**
+     * @return boolean
+     */
+    public function isFirstTime()
+    {
+        if ($this->conversation === null) {
+            return null;
+        } else {
+            return $this->conversation->isFirstTime();
+        }
+    }
 }

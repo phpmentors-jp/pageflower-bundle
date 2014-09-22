@@ -36,6 +36,11 @@ class Conversation implements EntityInterface
     private $pageflow;
 
     /**
+     * @var integer
+     */
+    private $conversationCount = 0;
+
+    /**
      * @param string                                         $conversationId
      * @param \PHPMentors\PageflowerBundle\Pageflow\Pageflow $pageflow
      */
@@ -94,5 +99,21 @@ class Conversation implements EntityInterface
     public function transition($stateId)
     {
         $this->pageflow->triggerEvent($stateId);
+    }
+
+    /**
+     * @param integer $conversationCount
+     */
+    public function increaseConversationCount()
+    {
+        ++$this->conversationCount;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isFirstTime()
+    {
+        return $this->conversationCount <= 1;
     }
 }

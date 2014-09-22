@@ -54,7 +54,7 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
     }
 
     /**
-     * @var array
+     * @return array
      */
     public function getConversations()
     {

@@ -91,7 +91,7 @@ class Conversation implements EntityInterface
     /**
      * @param string $stateId
      */
-    public function transitionTo($stateId)
+    public function transition($stateId)
     {
         $this->pageflow->triggerEvent($stateId);
     }

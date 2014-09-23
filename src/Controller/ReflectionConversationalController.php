@@ -19,7 +19,7 @@ class ReflectionConversationalController implements EntityInterface
     /**
      * @var array
      */
-    private $acceptableStates = array();
+    private $acceptablePages = array();
 
     /**
      * @var \ReflectionClass
@@ -50,8 +50,8 @@ class ReflectionConversationalController implements EntityInterface
      */
     public function addAcceptablePage($method, $pageId)
     {
-        if (!array_key_exists($method, $this->acceptableStates)) {
-            $this->acceptableStates[$method] = array();
+        if (!array_key_exists($method, $this->acceptablePages)) {
+            $this->acceptablePages[$method] = array();
         }
 
         $this->acceptableStates[$method][] = $pageId;
@@ -63,8 +63,8 @@ class ReflectionConversationalController implements EntityInterface
      */
     public function getAcceptablePages($method)
     {
-        if (array_key_exists($method, $this->acceptableStates)) {
-            return $this->acceptableStates[$method];
+        if (array_key_exists($method, $this->acceptablePages)) {
+            return $this->acceptablePages[$method];
         } else {
             return array();
         }

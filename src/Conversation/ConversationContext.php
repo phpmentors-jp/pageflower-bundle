@@ -133,7 +133,7 @@ class ConversationContext
     }
 
     /**
-     * @return \Stagehand\FSM\State\StateInterface
+     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
      */
     public function getCurrentState()
     {
@@ -145,7 +145,7 @@ class ConversationContext
     }
 
     /**
-     * @return \Stagehand\FSM\State\StateInterface
+     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
      */
     public function getPreviousState()
     {

@@ -140,12 +140,12 @@ class ConversationListener implements ConversationContextAwareInterface
                         }
                     }
 
-                    if (!in_array($conversation->getCurrentPage()->getStateId(), $reflectionConversationalController->getAcceptableStates($action))) {
+                    if (!in_array($conversation->getCurrentPage()->getPageId(), $reflectionConversationalController->getAcceptableStates($action))) {
                         throw new AccessDeniedHttpException(sprintf(
                             'Controller "%s" can be accessed when the current state is one of [ %s ], the actual state is "%s".',
                             get_class($conversationalController) . '::' . $action,
                             implode(', ', $reflectionConversationalController->getAcceptableStates($action)),
-                            $conversation->getCurrentPage()->getStateId()
+                            $conversation->getCurrentPage()->getPageId()
                         ));
                     }
 
@@ -179,7 +179,7 @@ class ConversationListener implements ConversationContextAwareInterface
         if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
             $conversation = $this->conversationContext->getConversation();
             if ($conversation !== null) {
-                if ($conversation->getCurrentPage()->isEndState()) {
+                if ($conversation->getCurrentPage()->isEndPage()) {
                     $conversation->end();
                     $this->conversationRepository->remove($conversation);
 

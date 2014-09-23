@@ -68,19 +68,19 @@ class Conversation implements EntityInterface
     }
 
     /**
-     * @return \Stagehand\FSM\State\StateInterface
+     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
      */
     public function getCurrentPage()
     {
-        return $this->pageflow->getCurrentState();
+        return $this->pageflow->getCurrentPage();
     }
 
     /**
-     * @return \Stagehand\FSM\State\StateInterface
+     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
      */
     public function getPreviousPage()
     {
-        return $this->pageflow->getPreviousState();
+        return $this->pageflow->getPreviousPage();
     }
 
     public function start()

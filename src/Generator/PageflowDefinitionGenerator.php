@@ -49,22 +49,22 @@ class PageflowDefinitionGenerator
     /**
      * @var array
      */
-    private $states;
+    private $pages;
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param \ReflectionClass                                        $controllerClass
      * @param string                                                  $controllerServiceId
      * @param \Doctrine\Common\Annotations\Reader                     $reader
-     * @param array                                                   $states
+     * @param array                                                   $pages
      */
-    public function __construct(ContainerBuilder $container, \ReflectionClass $controllerClass, $controllerServiceId, Reader $reader, array &$states)
+    public function __construct(ContainerBuilder $container, \ReflectionClass $controllerClass, $controllerServiceId, Reader $reader, array &$pages)
     {
         $this->container = $container;
         $this->controllerClass = $controllerClass;
         $this->controllerServiceId = $controllerServiceId;
         $this->reader = $reader;
-        $this->states = &$states;
+        $this->pages = &$pages;
     }
 
     /**
@@ -122,7 +122,7 @@ class PageflowDefinitionGenerator
                     $pageflowBuilderDefinition->addMethodCall('setStartState', array($page->value[0]));
                 }
 
-                $this->states[] = $page->value[0];
+                $this->pages[] = $page->value[0];
 
                 if (count(array_slice($page->value, 1)) == 0) {
                     throw new \LogicException(sprintf(
@@ -174,7 +174,7 @@ class PageflowDefinitionGenerator
 
                     $pageflowBuilderDefinition->addMethodCall('addState', array($page->value));
                     $pageflowBuilderDefinition->addMethodCall('setEndState', array($page->value, StateInterface::STATE_FINAL));
-                    $this->states[] = $page->value;
+                    $this->pages[] = $page->value;
                 } elseif (is_array($page->value)) {
                     if (!(count($page->value) == 1 && is_string($page->value[0]))) {
                         throw new \LogicException(sprintf(
@@ -190,7 +190,7 @@ class PageflowDefinitionGenerator
 
                     $pageflowBuilderDefinition->addMethodCall('addState', array($page->value[0]));
                     $pageflowBuilderDefinition->addMethodCall('setEndState', array($page->value[0], StateInterface::STATE_FINAL));
-                    $this->states[] = $page->value[0];
+                    $this->pages[] = $page->value[0];
                 } else {
                     throw new \LogicException(sprintf(
                         'The value for annotation "%s" should be string or single value array, "%s" is specified.',
@@ -210,11 +210,11 @@ class PageflowDefinitionGenerator
         }
 
         foreach ($transitions as $transition) {
-            if (!in_array($transition[2], $this->states)) {
+            if (!in_array($transition[2], $this->pages)) {
                 throw new \LogicException(sprintf(
                     'The value for annotation "%s" must be a one of [ %s ], "%s" is specified.',
                     'PHPMentors\PageflowerBundle\Annotation\Transition',
-                    implode(', ', array_map(function ($stateId) { return sprintf('"%s"', $stateId); }, $this->states)),
+                    implode(', ', array_map(function ($pageId) { return sprintf('"%s"', $pageId); }, $this->pages)),
                     $transition[2]
                 ));
             }

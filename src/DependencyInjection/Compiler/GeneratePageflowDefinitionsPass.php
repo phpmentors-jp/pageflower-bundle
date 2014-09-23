@@ -35,11 +35,11 @@ class GeneratePageflowDefinitionsPass implements CompilerPassInterface
                 ));
             }
 
-            $states = array();
-            $pageflowDefinitionGenerator = new PageflowDefinitionGenerator($container, $controllerClass, $controllerServiceId, $container->get('annotation_reader'), $states);
+            $pages = array();
+            $pageflowDefinitionGenerator = new PageflowDefinitionGenerator($container, $controllerClass, $controllerServiceId, $container->get('annotation_reader'), $pages);
             $pageflowDefinitionGenerator->generate();
 
-            $reflectionConversationalControllerDefinitionGenerator = new ReflectionConversationalControllerDefinitionGenerator($container, $controllerClass, $controllerServiceId, $container->get('annotation_reader'), $states);
+            $reflectionConversationalControllerDefinitionGenerator = new ReflectionConversationalControllerDefinitionGenerator($container, $controllerClass, $controllerServiceId, $container->get('annotation_reader'), $pages);
             $reflectionConversationalControllerDefinitionGenerator->generate();
         }
     }

@@ -54,7 +54,7 @@ class ReflectionConversationalController implements EntityInterface
             $this->acceptablePages[$method] = array();
         }
 
-        $this->acceptableStates[$method][] = $pageId;
+        $this->acceptablePages[$method][] = $pageId;
     }
 
     /**

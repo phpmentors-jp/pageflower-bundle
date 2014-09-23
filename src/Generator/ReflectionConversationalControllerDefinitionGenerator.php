@@ -45,22 +45,22 @@ class ReflectionConversationalControllerDefinitionGenerator
     /**
      * @var array
      */
-    private $states;
+    private $pages;
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param \ReflectionClass                                        $controllerClass
      * @param string                                                  $controllerServiceId
      * @param \Doctrine\Common\Annotations\Reader                     $reader
-     * @param array                                                   $states
+     * @param array                                                   $pages
      */
-    public function __construct(ContainerBuilder $container, \ReflectionClass $controllerClass, $controllerServiceId, Reader $reader, array $states)
+    public function __construct(ContainerBuilder $container, \ReflectionClass $controllerClass, $controllerServiceId, Reader $reader, array $pages)
     {
         $this->container = $container;
         $this->controllerClass = $controllerClass;
         $this->controllerServiceId = $controllerServiceId;
         $this->reader = $reader;
-        $this->states = $states;
+        $this->pages = $pages;
     }
 
     /**
@@ -86,11 +86,11 @@ class ReflectionConversationalControllerDefinitionGenerator
                                 throw new \LogicException(sprintf('The value for annotation "%s" cannot be empty.', get_class($annotation)));
                             }
 
-                            if (!in_array($accept, $this->states)) {
+                            if (!in_array($accept, $this->pages)) {
                                 throw new \LogicException(sprintf(
                                     'The value for annotation "%s" must be a one of [ %s ], "%s" is specified.',
                                     get_class($annotation),
-                                    implode(', ', array_map(function ($stateId) { return sprintf('"%s"', $stateId); }, $this->states)),
+                                    implode(', ', array_map(function ($pageId) { return sprintf('"%s"', $pageId); }, $this->pages)),
                                     $accept
                                 ));
                             }

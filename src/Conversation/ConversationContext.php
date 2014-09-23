@@ -147,7 +147,7 @@ class ConversationContext
     /**
      * @return \PHPMentors\PageflowerBundle\Pageflow\Page
      */
-    public function getPreviousState()
+    public function getPreviousPage()
     {
         if ($this->conversation === null) {
             return null;

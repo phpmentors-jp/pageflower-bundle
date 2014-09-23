@@ -78,7 +78,7 @@ class Conversation implements EntityInterface
     /**
      * @return \Stagehand\FSM\State\StateInterface
      */
-    public function getPreviousState()
+    public function getPreviousPage()
     {
         return $this->pageflow->getPreviousState();
     }

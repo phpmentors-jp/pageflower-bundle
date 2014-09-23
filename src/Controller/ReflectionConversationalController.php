@@ -46,15 +46,15 @@ class ReflectionConversationalController implements EntityInterface
 
     /**
      * @param string $method
-     * @param string $stateId
+     * @param string $pageId
      */
-    public function addAcceptableState($method, $stateId)
+    public function addAcceptablePage($method, $pageId)
     {
         if (!array_key_exists($method, $this->acceptableStates)) {
             $this->acceptableStates[$method] = array();
         }
 
-        $this->acceptableStates[$method][] = $stateId;
+        $this->acceptableStates[$method][] = $pageId;
     }
 
     /**

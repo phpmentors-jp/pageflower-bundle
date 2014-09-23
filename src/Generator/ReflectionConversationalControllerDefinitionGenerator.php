@@ -95,7 +95,7 @@ class ReflectionConversationalControllerDefinitionGenerator
                                 ));
                             }
 
-                            $definition->addMethodCall('addAcceptableState', array($method->getName(), $accept));
+                            $definition->addMethodCall('addAcceptablePage', array($method->getName(), $accept));
                         }
                     }
                 }

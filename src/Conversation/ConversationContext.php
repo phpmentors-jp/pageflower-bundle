@@ -135,7 +135,7 @@ class ConversationContext
     /**
      * @return \PHPMentors\PageflowerBundle\Pageflow\Page
      */
-    public function getCurrentState()
+    public function getCurrentPage()
     {
         if ($this->conversation === null) {
             return null;

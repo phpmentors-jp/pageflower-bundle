@@ -61,7 +61,7 @@ class ReflectionConversationalController implements EntityInterface
      * @param  string $method
      * @return array
      */
-    public function getAcceptableStates($method)
+    public function getAcceptablePages($method)
     {
         if (array_key_exists($method, $this->acceptableStates)) {
             return $this->acceptableStates[$method];

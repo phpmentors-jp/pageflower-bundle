@@ -142,7 +142,7 @@ class ConversationListener implements ConversationContextAwareInterface
 
                     if (!in_array($conversation->getCurrentPage()->getPageId(), $reflectionConversationalController->getAcceptableStates($action))) {
                         throw new AccessDeniedHttpException(sprintf(
-                            'Controller "%s" can be accessed when the current state is one of [ %s ], the actual state is "%s".',
+                            'Controller "%s" can be accessed when the current page is one of [ %s ], the actual page is "%s".',
                             get_class($conversationalController) . '::' . $action,
                             implode(', ', $reflectionConversationalController->getAcceptableStates($action)),
                             $conversation->getCurrentPage()->getPageId()

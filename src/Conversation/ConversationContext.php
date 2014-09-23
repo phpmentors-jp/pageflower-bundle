@@ -140,7 +140,7 @@ class ConversationContext
         if ($this->conversation === null) {
             return null;
         } else {
-            return $this->conversation->getCurrentState();
+            return $this->conversation->getCurrentPage();
         }
     }
 

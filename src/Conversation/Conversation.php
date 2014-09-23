@@ -70,7 +70,7 @@ class Conversation implements EntityInterface
     /**
      * @return \Stagehand\FSM\State\StateInterface
      */
-    public function getCurrentState()
+    public function getCurrentPage()
     {
         return $this->pageflow->getCurrentState();
     }

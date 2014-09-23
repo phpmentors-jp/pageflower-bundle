@@ -24,4 +24,20 @@ class Pageflow extends StateMachine implements EntityInterface
     {
         return $this->getStateMachineId();
     }
+
+    /**
+     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
+     */
+    public function getCurrentPage()
+    {
+        return new Page($this->getCurrentState());
+    }
+
+    /**
+     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
+     */
+    public function getPreviousPage()
+    {
+        return new Page($this->getPreviousState());
+    }
 }

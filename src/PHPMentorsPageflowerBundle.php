@@ -38,7 +38,7 @@ class PHPMentorsPageflowerBundle extends Bundle
     public function getContainerExtension()
     {
         if ($this->extension === null) {
-            $this->extension = new PHPMentorsPageflowerExtension($this->kernel);
+            $this->extension = new PHPMentorsPageflowerExtension();
         }
 
         return $this->extension;

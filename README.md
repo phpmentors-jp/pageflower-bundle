@@ -24,8 +24,8 @@ First, add the dependency to `phpmentors/pageflower-bundle` into your `composer.
 ```json
 {
     "require": {
-        "phpmentors/pageflower-bundle": "~1.0@dev"
-    },
+        "phpmentors/pageflower-bundle": "~1.1@dev"
+    }
 }
 ```
 

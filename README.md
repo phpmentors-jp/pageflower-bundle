@@ -18,7 +18,7 @@ First, add the dependency to `phpmentors/pageflower-bundle` into your `composer.
 {
     "require": {
         "phpmentors/pageflower-bundle": "1.0.*"
-    },
+    }
 }
 ```
 

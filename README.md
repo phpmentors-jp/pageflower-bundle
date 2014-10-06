@@ -8,6 +8,13 @@ A pageflow engine for Symfony applications
 
 ## Features
 
+* Annotation-based page flow configuration
+* Conversation management
+* Access-controlled actions
+* Conversation-scoped properties
+* User-defined methods to be called immediately after a conversation has started
+* Multiple browser windows or tabs
+
 ## Installation
 
 `PHPMentorsPageflowerBundle` can be installed using [Composer](http://getcomposer.org/).

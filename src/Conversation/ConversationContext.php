@@ -157,7 +157,7 @@ class ConversationContext
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isFirstTime()
     {

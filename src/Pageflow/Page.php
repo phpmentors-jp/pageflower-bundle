@@ -38,7 +38,7 @@ class Page
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEndPage()
     {

@@ -36,7 +36,7 @@ class Conversation implements EntityInterface
     private $pageflow;
 
     /**
-     * @var integer
+     * @var int
      */
     private $conversationCount = 0;
 
@@ -102,7 +102,7 @@ class Conversation implements EntityInterface
     }
 
     /**
-     * @param integer $conversationCount
+     * @param int $conversationCount
      */
     public function increaseConversationCount()
     {
@@ -110,7 +110,7 @@ class Conversation implements EntityInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isFirstTime()
     {

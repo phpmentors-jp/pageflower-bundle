@@ -31,7 +31,7 @@ class GeneratePageflowDefinitionsPass implements CompilerPassInterface
                 throw new \LogicException(sprintf(
                     'The controller "%s" must implement "%s".',
                     $controllerClass->getName(),
-                    'PHPMentors\PageflowerBundle\Controller\ReflectionConversationalController'
+                    'PHPMentors\PageflowerBundle\Controller\ConversationalControllerInterface'
                 ));
             }
 

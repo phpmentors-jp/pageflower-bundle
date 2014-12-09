@@ -27,8 +27,8 @@ class PageflowerPageflowDebugCommand extends ContainerAwareCommand
             ->setName('pageflower:pageflow:debug')
             ->setDescription('Displays current pageflows for an application')
             ->setHelp(
-'The <info>%command.name%</info> displays the configured pageflows:' . PHP_EOL .
-PHP_EOL .
+'The <info>%command.name%</info> displays the configured pageflows:'.PHP_EOL.
+PHP_EOL.
 '  <info>php %command.full_name%</info>'
             );
     }
@@ -48,8 +48,8 @@ PHP_EOL .
             $pageflowIdMaxLength = max($pageflowIdMaxLength, strlen($pageflowId));
         }
 
-        $format  = '%-' . $pageflowIdMaxLength . 's';
-        $formatHeader  = '%-' . ($pageflowIdMaxLength + 19) . 's';
+        $format  = '%-'.$pageflowIdMaxLength.'s';
+        $formatHeader  = '%-'.($pageflowIdMaxLength + 19).'s';
         $output->writeln(sprintf($formatHeader, '<comment>Pageflow Id</comment>'));
 
         foreach ($pageflows as $pageflowId => $pageflow) {

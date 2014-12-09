@@ -222,12 +222,12 @@ class PageflowDefinitionGenerator
             $pageflowBuilderDefinition->addMethodCall('addTransition', $transition);
         }
 
-        $pageflowBuilderServiceId = 'phpmentors_pageflower.pageflow_builder.' . $this->controllerServiceId;
+        $pageflowBuilderServiceId = 'phpmentors_pageflower.pageflow_builder.'.$this->controllerServiceId;
         $this->container->setDefinition($pageflowBuilderServiceId, $pageflowBuilderDefinition);
 
         $pageflowDefinition = new DefinitionDecorator('phpmentors_pageflower.pageflow');
         $pageflowDefinition->setFactoryService($pageflowBuilderServiceId);
-        $pageflowServiceId = 'phpmentors_pageflower.pageflow.' . $this->controllerServiceId;
+        $pageflowServiceId = 'phpmentors_pageflower.pageflow.'.$this->controllerServiceId;
         $this->container->setDefinition($pageflowServiceId, $pageflowDefinition);
         $this->container->getDefinition('phpmentors_pageflower.pageflow_repository')->addMethodCall('add', array(new Reference($pageflowServiceId)));
 

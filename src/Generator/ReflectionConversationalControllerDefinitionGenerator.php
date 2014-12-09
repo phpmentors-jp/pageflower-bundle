@@ -110,7 +110,7 @@ class ReflectionConversationalControllerDefinitionGenerator
             }
         }
 
-        $reflectionConversationalControllerServiceId = 'phpmentors_pageflower.reflection_conversational_controller.' . $this->controllerServiceId;
+        $reflectionConversationalControllerServiceId = 'phpmentors_pageflower.reflection_conversational_controller.'.$this->controllerServiceId;
         $this->container->setDefinition($reflectionConversationalControllerServiceId, $definition);
 
         $this->container->getDefinition('phpmentors_pageflower.reflection_conversational_controller_repository')->addMethodCall('add', array(new Reference($reflectionConversationalControllerServiceId)));

@@ -86,7 +86,7 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
     }
 
     /**
-     * @param  string  $conversationId
+     * @param  string $conversationId
      * @return bool
      */
     public function offsetExists($conversationId)

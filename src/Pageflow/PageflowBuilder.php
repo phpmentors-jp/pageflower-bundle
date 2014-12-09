@@ -12,7 +12,6 @@
 
 namespace PHPMentors\PageflowerBundle\Pageflow;
 
-use Stagehand\FSM\StateMachine\StateMachine;
 use Stagehand\FSM\StateMachine\StateMachineBuilder;
 
 class PageflowBuilder extends StateMachineBuilder

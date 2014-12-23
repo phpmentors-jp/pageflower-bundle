@@ -8,12 +8,12 @@ A pageflow engine for Symfony applications
 
 ## Features
 
-* Annotation-based page flow configuration
+* Annotation-based page flow definition
 * Conversation management
 * Access-controlled actions
 * Conversation-scoped properties
 * User-defined methods to be called immediately after a conversation has started
-* Multiple browser windows or tabs
+* Support for Multiple browser windows or tabs
 
 ## Installation
 

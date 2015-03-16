@@ -8,6 +8,7 @@
     <parameter key="phpmentors_pageflower.conversation_repository.class">PHPMentors\PageflowerBundle\Conversation\ConversationRepository</parameter>
     <parameter key="phpmentors_pageflower.conversational_global_variables.class">PHPMentors\PageflowerBundle\Templating\ConversationalGlobalVariables</parameter>
     <parameter key="phpmentors_pageflower.conversational_session.class">PHPMentors\PageflowerBundle\Session\ConversationalSession</parameter>
+    <parameter key="phpmentors_pageflower.endable_conversation_specification.class">PHPMentors\PageflowerBundle\Conversation\EndableConversationSpecification</parameter>
     <parameter key="phpmentors_pageflower.form_type_conversation_extension.class">PHPMentors\PageflowerBundle\Form\Extension\Conversation\Type\FormTypeConversationExtension</parameter>
     <parameter key="phpmentors_pageflower.pageflow.class">PHPMentors\PageflowerBundle\Pageflow\Pageflow</parameter>
     <parameter key="phpmentors_pageflower.pageflow_builder.class">PHPMentors\PageflowerBundle\Pageflow\PageflowBuilder</parameter>
@@ -17,6 +18,7 @@
     <!-- Configuration parameters -->
     <parameter key="phpmentors_pageflower.conversation_request_parameter_name"/>
     <parameter key="phpmentors_pageflower.conversation_session_storage_key"/>
+    <parameter key="phpmentors_pageflower.end_on_next_step_of_end_page"/>
   </parameters>
   <services>
     <service id="phpmentors_pageflower.conversation_bag" class="%phpmentors_pageflower.conversation_bag.class%" public="false">
@@ -31,6 +33,7 @@
       <argument type="service" id="phpmentors_pageflower.pageflow_repository"/>
       <argument type="service" id="phpmentors_pageflower.reflection_conversational_controller_repository"/>
       <argument type="service" id="security.secure_random"/>
+      <argument type="service" id="phpmentors_pageflower.endable_conversation_specification"/>
       <call method="setConversationContext">
         <argument type="service" id="phpmentors_pageflower.conversation_context"/>
       </call>
@@ -52,6 +55,9 @@
     <service id="phpmentors_pageflower.pageflow_repository" class="%phpmentors_pageflower.pageflow_repository.class%"/>
     <service id="phpmentors_pageflower.reflection_conversational_controller" class="%phpmentors_pageflower.reflection_conversational_controller.class%" abstract="true" public="false"/>
     <service id="phpmentors_pageflower.reflection_conversational_controller_repository" class="%phpmentors_pageflower.reflection_conversational_controller_repository.class%" public="false"/>
+    <service id="phpmentors_pageflower.endable_conversation_specification" class="%phpmentors_pageflower.endable_conversation_specification.class%" public="false">
+      <argument>%phpmentors_pageflower.end_on_next_step_of_end_page%</argument>
+    </service>
     <service id="phpmentors_pageflower.form_type_conversation_extension" class="%phpmentors_pageflower.form_type_conversation_extension.class%">
       <call method="setConversationContext">
         <argument type="service" id="phpmentors_pageflower.conversation_context"/>

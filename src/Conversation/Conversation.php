@@ -41,6 +41,12 @@ class Conversation implements EntityInterface
     private $stepCount = 0;
 
     /**
+     * @var int
+     * @since Property available since Release 1.1.0
+     */
+    private $stepCountOnEndPage;
+
+    /**
      * @param string                                         $conversationId
      * @param \PHPMentors\PageflowerBundle\Pageflow\Pageflow $pageflow
      */
@@ -137,11 +143,28 @@ class Conversation implements EntityInterface
     }
 
     /**
-     * @return bool
      * @since Method available since Release 1.1.0
      */
-    public function isEndable()
+    public function logStepCountOnEndPage()
     {
-        return $this->pageflow->getCurrentPage()->isEndPage();
+        $this->stepCountOnEndPage = $this->stepCount;
+    }
+
+    /**
+     * @return int
+     * @since Method available since Release 1.1.0
+     */
+    public function getStepCount()
+    {
+        return $this->stepCount;
+    }
+
+    /**
+     * @return int|null
+     * @since Method available since Release 1.1.0
+     */
+    public function getStepCountOnEndPage()
+    {
+        return $this->stepCountOnEndPage;
     }
 }

@@ -19,10 +19,10 @@
     <parameter key="phpmentors_pageflower.conversation_session_storage_key"/>
   </parameters>
   <services>
-    <service id="phpmentors_pageflower.conversation_bag" class="%phpmentors_pageflower.conversation_bag.class%">
+    <service id="phpmentors_pageflower.conversation_bag" class="%phpmentors_pageflower.conversation_bag.class%" public="false">
       <argument>%phpmentors_pageflower.conversation_session_storage_key%</argument>
     </service>
-    <service id="phpmentors_pageflower.conversation_context" class="%phpmentors_pageflower.conversation_context.class%">
+    <service id="phpmentors_pageflower.conversation_context" class="%phpmentors_pageflower.conversation_context.class%" public="false">
       <argument>%phpmentors_pageflower.conversation_request_parameter_name%</argument>
       <argument type="service" id="router"/>
     </service>
@@ -37,21 +37,21 @@
       <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController"/>
       <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse"/>
     </service>
-    <service id="phpmentors_pageflower.conversation_repository" class="%phpmentors_pageflower.conversation_repository.class%"/>
+    <service id="phpmentors_pageflower.conversation_repository" class="%phpmentors_pageflower.conversation_repository.class%" public="false"/>
     <service id="phpmentors_pageflower.conversational_session" class="%phpmentors_pageflower.conversational_session.class%">
       <argument type="service" id="session.storage"/>
       <argument type="service" id="session.attribute_bag"/>
       <argument type="service" id="session.flash_bag"/>
       <argument type="service" id="phpmentors_pageflower.conversation_bag"/>
     </service>
-    <service id="phpmentors_pageflower.conversational_global_variables" class="%phpmentors_pageflower.conversational_global_variables.class%">
+    <service id="phpmentors_pageflower.conversational_global_variables" class="%phpmentors_pageflower.conversational_global_variables.class%" public="false">
       <argument type="service" id="service_container"/>
     </service>
-    <service id="phpmentors_pageflower.pageflow" class="%phpmentors_pageflower.pageflow.class%" abstract="true" factory-service="phpmentors_pageflower.pageflow_builder" factory-method="getStateMachine"/>
-    <service id="phpmentors_pageflower.pageflow_builder" class="%phpmentors_pageflower.pageflow_builder.class%" abstract="true"/>
+    <service id="phpmentors_pageflower.pageflow" class="%phpmentors_pageflower.pageflow.class%" abstract="true" factory-service="phpmentors_pageflower.pageflow_builder" factory-method="getStateMachine" public="false"/>
+    <service id="phpmentors_pageflower.pageflow_builder" class="%phpmentors_pageflower.pageflow_builder.class%" abstract="true" public="false"/>
     <service id="phpmentors_pageflower.pageflow_repository" class="%phpmentors_pageflower.pageflow_repository.class%"/>
-    <service id="phpmentors_pageflower.reflection_conversational_controller" class="%phpmentors_pageflower.reflection_conversational_controller.class%" abstract="true"/>
-    <service id="phpmentors_pageflower.reflection_conversational_controller_repository" class="%phpmentors_pageflower.reflection_conversational_controller_repository.class%"/>
+    <service id="phpmentors_pageflower.reflection_conversational_controller" class="%phpmentors_pageflower.reflection_conversational_controller.class%" abstract="true" public="false"/>
+    <service id="phpmentors_pageflower.reflection_conversational_controller_repository" class="%phpmentors_pageflower.reflection_conversational_controller_repository.class%" public="false"/>
     <service id="phpmentors_pageflower.form_type_conversation_extension" class="%phpmentors_pageflower.form_type_conversation_extension.class%">
       <call method="setConversationContext">
         <argument type="service" id="phpmentors_pageflower.conversation_context"/>

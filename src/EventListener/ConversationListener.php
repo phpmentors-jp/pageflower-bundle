@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -23,6 +23,7 @@ use PHPMentors\PageflowerBundle\Conversation\Conversation;
 use PHPMentors\PageflowerBundle\Conversation\ConversationContext;
 use PHPMentors\PageflowerBundle\Conversation\ConversationContextAwareInterface;
 use PHPMentors\PageflowerBundle\Conversation\ConversationRepository;
+use PHPMentors\PageflowerBundle\Conversation\EndableConversationSpecification;
 use PHPMentors\PageflowerBundle\Pageflow\Pageflow;
 use PHPMentors\PageflowerBundle\Pageflow\PageflowRepository;
 
@@ -54,17 +55,25 @@ class ConversationListener implements ConversationContextAwareInterface
     private $secureRandom;
 
     /**
+     * @var EndableConversationSpecification
+     * @since Property available since Release 1.1.0
+     */
+    private $endableConversationSpecification;
+
+    /**
      * @param \PHPMentors\PageflowerBundle\Conversation\ConversationRepository                     $conversationRepository
      * @param \PHPMentors\PageflowerBundle\Pageflow\PageflowRepository                             $pageflowRepository
      * @param \PHPMentors\PageflowerBundle\Controller\ReflectionConversationalControllerRepository $reflectionConversationalControllerRepository
      * @param \Symfony\Component\Security\Core\Util\SecureRandomInterface                          $secureRandom
+     * @param EndableConversationSpecification                                                     $endableConversationSpecification
      */
-    public function __construct(ConversationRepository $conversationRepository, PageflowRepository $pageflowRepository, ReflectionConversationalControllerRepository $reflectionConversationalControllerRepository, SecureRandomInterface $secureRandom)
+    public function __construct(ConversationRepository $conversationRepository, PageflowRepository $pageflowRepository, ReflectionConversationalControllerRepository $reflectionConversationalControllerRepository, SecureRandomInterface $secureRandom, EndableConversationSpecification $endableConversationSpecification)
     {
         $this->conversationRepository = $conversationRepository;
         $this->pageflowRepository = $pageflowRepository;
         $this->reflectionConversationalControllerRepository = $reflectionConversationalControllerRepository;
         $this->secureRandom = $secureRandom;
+        $this->endableConversationSpecification = $endableConversationSpecification;
     }
 
     /**
@@ -128,7 +137,7 @@ class ConversationListener implements ConversationContextAwareInterface
                         $this->conversationRepository->add($conversation);
                     }
 
-                    $conversation->increaseConversationCount();
+                    $conversation->increaseStepCount();
 
                     if (!isset($reflectionConversationalController)) {
                         $reflectionConversationalController = $this->reflectionConversationalControllerRepository->findByClass(get_class($conversationalController));
@@ -179,7 +188,7 @@ class ConversationListener implements ConversationContextAwareInterface
         if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
             $conversation = $this->conversationContext->getConversation();
             if ($conversation !== null) {
-                if ($conversation->getCurrentPage()->isEndPage()) {
+                if ($this->endableConversationSpecification->isSatisfiedBy($conversation)) {
                     $conversation->end();
                     $this->conversationRepository->remove($conversation);
 
@@ -193,6 +202,10 @@ class ConversationListener implements ConversationContextAwareInterface
                         }
                     }
                 } else {
+                    if ($conversation->getCurrentPage()->isEndPage()) {
+                        $conversation->logStepCountOnEndPage();
+                    }
+
                     $conversationalController = $this->conversationContext->getConversationalController();
                     $reflectionConversationalController = $this->conversationContext->getReflectionConversationalController();
                     if ($conversationalController !== null && $reflectionConversationalController !== null) {

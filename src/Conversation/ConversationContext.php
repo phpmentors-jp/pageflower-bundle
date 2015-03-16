@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -158,13 +158,23 @@ class ConversationContext
 
     /**
      * @return bool
+     * @since Method available since Release 1.1.0
      */
-    public function isFirstTime()
+    public function onFirstStep()
     {
         if ($this->conversation === null) {
             return null;
         } else {
-            return $this->conversation->isFirstTime();
+            return $this->conversation->onFirstStep();
         }
+    }
+
+    /**
+     * @return bool
+     * @deprecated Deprecated since version 1.1.0, to be removed in 2.0.0.
+     */
+    public function isFirstTime()
+    {
+        return $this->onFirstStep();
     }
 }

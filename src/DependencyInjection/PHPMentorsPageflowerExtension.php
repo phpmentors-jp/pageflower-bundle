@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -49,5 +49,6 @@ class PHPMentorsPageflowerExtension extends Extension
     {
         $container->setParameter('phpmentors_pageflower.conversation_request_parameter_name', $config['conversation']['request_parameter_name']);
         $container->setParameter('phpmentors_pageflower.conversation_session_storage_key', $config['conversation']['session_storage_name']);
+        $container->setParameter('phpmentors_pageflower.end_on_next_step_of_end_page', $config['conversation']['end_on_next_step_of_end_page']);
     }
 }

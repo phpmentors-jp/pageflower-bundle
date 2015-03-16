@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -35,6 +35,9 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('session_storage_name')
                             ->defaultValue('_pageflower_conversations')
                             ->cannotBeEmpty()
+                        ->end()
+                        ->booleanNode('end_on_next_step_of_end_page')
+                            ->defaultFalse()
                         ->end()
                     ->end()
                 ->end()

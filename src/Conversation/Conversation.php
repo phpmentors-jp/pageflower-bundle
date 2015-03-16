@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -38,7 +38,13 @@ class Conversation implements EntityInterface
     /**
      * @var int
      */
-    private $conversationCount = 0;
+    private $stepCount = 0;
+
+    /**
+     * @var int
+     * @since Property available since Release 1.1.0
+     */
+    private $stepCountOnEndPage;
 
     /**
      * @param string                                         $conversationId
@@ -102,18 +108,63 @@ class Conversation implements EntityInterface
     }
 
     /**
+     * @since Method available since Release 1.1.0
+     */
+    public function increaseStepCount()
+    {
+        ++$this->stepCount;
+    }
+
+    /**
      * @param int $conversationCount
+     * @deprecated Deprecated since version 1.1.0, to be removed in 2.0.0.
      */
     public function increaseConversationCount()
     {
-        ++$this->conversationCount;
+        $this->increaseStepCount();
     }
 
     /**
      * @return bool
+     * @since Method available since Release 1.1.0
+     */
+    public function onFirstStep()
+    {
+        return $this->stepCount <= 1;
+    }
+
+    /**
+     * @return bool
+     * @deprecated Deprecated since version 1.1.0, to be removed in 2.0.0.
      */
     public function isFirstTime()
     {
-        return $this->conversationCount <= 1;
+        return $this->onFirstStep();
+    }
+
+    /**
+     * @since Method available since Release 1.1.0
+     */
+    public function logStepCountOnEndPage()
+    {
+        $this->stepCountOnEndPage = $this->stepCount;
+    }
+
+    /**
+     * @return int
+     * @since Method available since Release 1.1.0
+     */
+    public function getStepCount()
+    {
+        return $this->stepCount;
+    }
+
+    /**
+     * @return int|null
+     * @since Method available since Release 1.1.0
+     */
+    public function getStepCountOnEndPage()
+    {
+        return $this->stepCountOnEndPage;
     }
 }

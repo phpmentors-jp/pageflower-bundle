@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -115,5 +115,14 @@ class Conversation implements EntityInterface
     public function isFirstTime()
     {
         return $this->conversationCount <= 1;
+    }
+
+    /**
+     * @return bool
+     * @since Method available since Release 1.1.0
+     */
+    public function isEndable()
+    {
+        return $this->pageflow->getCurrentPage()->isEndPage();
     }
 }

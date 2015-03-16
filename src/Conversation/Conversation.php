@@ -102,6 +102,14 @@ class Conversation implements EntityInterface
     }
 
     /**
+     * @since Method available since Release 1.1.0
+     */
+    public function increaseStepCount()
+    {
+        ++$this->stepCount;
+    }
+
+    /**
      * @param int $conversationCount
      */
     public function increaseConversationCount()

@@ -158,6 +158,19 @@ class ConversationContext
 
     /**
      * @return bool
+     * @since Method available since Release 1.1.0
+     */
+    public function onFirstStep()
+    {
+        if ($this->conversation === null) {
+            return null;
+        } else {
+            return $this->conversation->onFirstStep();
+        }
+    }
+
+    /**
+     * @return bool
      */
     public function isFirstTime()
     {

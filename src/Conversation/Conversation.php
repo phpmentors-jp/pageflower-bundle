@@ -120,6 +120,15 @@ class Conversation implements EntityInterface
 
     /**
      * @return bool
+     * @since Method available since Release 1.1.0
+     */
+    public function onFirstStep()
+    {
+        return $this->stepCount <= 1;
+    }
+
+    /**
+     * @return bool
      */
     public function isFirstTime()
     {

@@ -171,13 +171,10 @@ class ConversationContext
 
     /**
      * @return bool
+     * @deprecated Deprecated since version 1.1.0, to be removed in 2.0.0.
      */
     public function isFirstTime()
     {
-        if ($this->conversation === null) {
-            return null;
-        } else {
-            return $this->conversation->onFirstStep();
-        }
+        return $this->onFirstStep();
     }
 }

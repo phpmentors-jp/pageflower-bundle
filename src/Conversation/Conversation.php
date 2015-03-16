@@ -38,7 +38,7 @@ class Conversation implements EntityInterface
     /**
      * @var int
      */
-    private $conversationCount = 0;
+    private $stepCount = 0;
 
     /**
      * @param string                                         $conversationId
@@ -106,7 +106,7 @@ class Conversation implements EntityInterface
      */
     public function increaseConversationCount()
     {
-        ++$this->conversationCount;
+        ++$this->stepCount;
     }
 
     /**
@@ -114,7 +114,7 @@ class Conversation implements EntityInterface
      */
     public function isFirstTime()
     {
-        return $this->conversationCount <= 1;
+        return $this->stepCount <= 1;
     }
 
     /**

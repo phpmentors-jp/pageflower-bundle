@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -164,7 +164,7 @@ class ConversationContext
         if ($this->conversation === null) {
             return null;
         } else {
-            return $this->conversation->isFirstTime();
+            return $this->conversation->onFirstStep();
         }
     }
 }

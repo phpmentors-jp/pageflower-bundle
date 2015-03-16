@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -179,7 +179,7 @@ class ConversationListener implements ConversationContextAwareInterface
         if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
             $conversation = $this->conversationContext->getConversation();
             if ($conversation !== null) {
-                if ($conversation->getCurrentPage()->isEndPage()) {
+                if ($conversation->isEndable()) {
                     $conversation->end();
                     $this->conversationRepository->remove($conversation);
 

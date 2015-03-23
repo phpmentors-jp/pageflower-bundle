@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -19,6 +19,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 use PHPMentors\PageflowerBundle\Annotation\Accept;
 use PHPMentors\PageflowerBundle\Annotation\Init;
+use PHPMentors\PageflowerBundle\Annotation\Stateful;
 
 class ReflectionConversationalControllerDefinitionGenerator
 {
@@ -105,7 +106,9 @@ class ReflectionConversationalControllerDefinitionGenerator
         foreach ($this->controllerClass->getProperties() as $property) { /* @var $property \ReflectionProperty */
             if ($property->getDeclaringClass()->getName() == $this->controllerClass->getName() && !$property->isStatic()) {
                 foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
-                    $definition->addMethodCall('addStatefulProperty', array($property->getName()));
+                    if ($annotation instanceof Stateful) {
+                        $definition->addMethodCall('addStatefulProperty', array($property->getName()));
+                    }
                 }
             }
         }

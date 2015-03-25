@@ -27,7 +27,8 @@ class ReflectionConversationalControllerRepository implements RepositoryInterfac
      */
     public function add(EntityInterface $entity)
     {
-        /* @var $entity \PHPMentors\PageflowerBundle\Controller\ReflectionConversationalController */
+        assert($entity instanceof ReflectionConversationalController);
+
         $this->entities[$entity->getClass()->getName()] = $entity;
     }
 
@@ -49,7 +50,8 @@ class ReflectionConversationalControllerRepository implements RepositoryInterfac
      */
     public function remove(EntityInterface $entity)
     {
-        /* @var $entity \PHPMentors\PageflowerBundle\Controller\ReflectionConversationalController */
+        assert($entity instanceof ReflectionConversationalController);
+
         if (array_key_exists($entity->getClass()->getName(), $this->entities)) {
             unset($this->entities[$entity->getClass()->getName()]);
         }

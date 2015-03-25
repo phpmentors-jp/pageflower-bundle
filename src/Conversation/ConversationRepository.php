@@ -18,7 +18,7 @@ use PHPMentors\DomainKata\Repository\RepositoryInterface;
 class ConversationRepository implements RepositoryInterface
 {
     /**
-     * @var \PHPMentors\PageflowerBundle\Conversation\ConversationCollectionInterface
+     * @var ConversationCollectionInterface
      */
     private $conversationCollection;
 
@@ -27,12 +27,13 @@ class ConversationRepository implements RepositoryInterface
      */
     public function add(EntityInterface $entity)
     {
-        /* @var $entity \PHPMentors\PageflowerBundle\Conversation\Conversation */
+        assert($entity instanceof Conversation);
+
         $this->conversationCollection[$entity->getConversationId()] = $entity;
     }
 
     /**
-     * @param \PHPMentors\PageflowerBundle\Conversation\ConversationCollectionInterface $conversationCollection
+     * @param ConversationCollectionInterface $conversationCollection
      */
     public function setConversationCollection(ConversationCollectionInterface $conversationCollection)
     {
@@ -40,8 +41,8 @@ class ConversationRepository implements RepositoryInterface
     }
 
     /**
-     * @param  string                                                 $conversationId
-     * @return \PHPMentors\PageflowerBundle\Conversation\Conversation
+     * @param  string       $conversationId
+     * @return Conversation
      */
     public function findByConversationId($conversationId)
     {
@@ -53,7 +54,8 @@ class ConversationRepository implements RepositoryInterface
      */
     public function remove(EntityInterface $entity)
     {
-        /* @var $entity \PHPMentors\PageflowerBundle\Conversation\Conversation */
+        assert($entity instanceof Conversation);
+
         unset($this->conversationCollection[$entity->getConversationId()]);
     }
 }

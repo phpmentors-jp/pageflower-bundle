@@ -27,7 +27,8 @@ class PageflowRepository implements RepositoryInterface
      */
     public function add(EntityInterface $entity)
     {
-        /* @var $entity \PHPMentors\PageflowerBundle\Pageflow\Pageflow */
+        assert($entity instanceof Pageflow);
+
         $this->pageflows[$entity->getPageflowId()] = $entity;
     }
 
@@ -57,7 +58,8 @@ class PageflowRepository implements RepositoryInterface
      */
     public function remove(EntityInterface $entity)
     {
-        /* @var $entity \PHPMentors\PageflowerBundle\Pageflow\Pageflow */
+        assert($entity instanceof Pageflow);
+
         if (array_key_exists($entity->getPageflowId(), $this->pageflows)) {
             unset($this->pageflows[$entity->getPageflowId()]);
         }

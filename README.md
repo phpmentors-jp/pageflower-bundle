@@ -5,7 +5,7 @@ A pageflow engine for Symfony applications
 [![Total Downloads](https://poser.pugx.org/phpmentors/pageflower-bundle/downloads.png)](https://packagist.org/packages/phpmentors/pageflower-bundle)
 [![Latest Stable Version](https://poser.pugx.org/phpmentors/pageflower-bundle/v/stable.png)](https://packagist.org/packages/phpmentors/pageflower-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/phpmentors/pageflower-bundle/v/unstable.png)](https://packagist.org/packages/phpmentors/pageflower-bundle)
-[![Build Status](https://travis-ci.org/phpmentors-jp/pageflower-bundle.svg?branch=master)](https://travis-ci.org/phpmentors-jp/pageflower-bundle)
+[![Build Status](https://travis-ci.org/phpmentors-jp/pageflower-bundle.svg?branch=1.1)](https://travis-ci.org/phpmentors-jp/pageflower-bundle)
 
 ## Features
 

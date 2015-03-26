@@ -17,11 +17,12 @@ use Symfony\Component\Routing\RouterInterface;
 
 use PHPMentors\PageflowerBundle\Controller\ConversationalControllerInterface;
 use PHPMentors\PageflowerBundle\Controller\ReflectionConversationalController;
+use PHPMentors\PageflowerBundle\Pageflow\Page;
 
 class ConversationContext
 {
     /**
-     * @var \PHPMentors\PageflowerBundle\Conversation\Conversation
+     * @var Conversation
      */
     private $conversation;
 
@@ -31,17 +32,17 @@ class ConversationContext
     private $conversationParameterName;
 
     /**
-     * @var \PHPMentors\PageflowerBundle\Controller\ConversationalControllerInterface
+     * @var ConversationalControllerInterface
      */
     private $conversationalController;
 
     /**
-     * @var \PHPMentors\PageflowerBundle\Controller\ReflectionConversationalController
+     * @var ReflectionConversationalController
      */
     private $reflectionConversationalController;
 
     /**
-     * @var \Symfony\Component\Routing\RouterInterface
+     * @var RouterInterface
      */
     private $router;
 
@@ -56,7 +57,7 @@ class ConversationContext
     }
 
     /**
-     * @param \PHPMentors\PageflowerBundle\Conversation\Conversation $conversation
+     * @param Conversation $conversation
      */
     public function setConversation($conversation)
     {
@@ -64,7 +65,7 @@ class ConversationContext
     }
 
     /**
-     * @return \PHPMentors\PageflowerBundle\Conversation\Conversation
+     * @return Conversation
      */
     public function getConversation()
     {
@@ -80,7 +81,7 @@ class ConversationContext
     }
 
     /**
-     * @param \PHPMentors\PageflowerBundle\Controller\ConversationalControllerInterface $conversationalController
+     * @param ConversationalControllerInterface $conversationalController
      */
     public function setConversationalController(ConversationalControllerInterface $conversationalController)
     {
@@ -88,7 +89,7 @@ class ConversationContext
     }
 
     /**
-     * @return \PHPMentors\PageflowerBundle\Controller\ConversationalControllerInterface
+     * @return ConversationalControllerInterface
      */
     public function getConversationalController()
     {
@@ -96,7 +97,7 @@ class ConversationContext
     }
 
     /**
-     * @param \PHPMentors\PageflowerBundle\Controller\ReflectionConversationalController $reflectionConversationalController
+     * @param ReflectionConversationalController $reflectionConversationalController
      */
     public function setReflectionConversationalController(ReflectionConversationalController $reflectionConversationalController)
     {
@@ -104,7 +105,7 @@ class ConversationContext
     }
 
     /**
-     * @return \PHPMentors\PageflowerBundle\Controller\ReflectionConversationalController
+     * @return ReflectionConversationalController
      */
     public function getReflectionConversationalController()
     {
@@ -133,7 +134,7 @@ class ConversationContext
     }
 
     /**
-     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
+     * @return Page
      */
     public function getCurrentPage()
     {
@@ -145,7 +146,7 @@ class ConversationContext
     }
 
     /**
-     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
+     * @return Page
      */
     public function getPreviousPage()
     {

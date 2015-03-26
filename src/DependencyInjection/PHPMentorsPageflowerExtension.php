@@ -42,8 +42,8 @@ class PHPMentorsPageflowerExtension extends Extension
     }
 
     /**
-     * @param array                                                   $config
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array            $config
+     * @param ContainerBuilder $container
      */
     private function transformConfigToContainerParameters(array $config, ContainerBuilder $container)
     {

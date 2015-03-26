@@ -14,10 +14,12 @@ namespace PHPMentors\PageflowerBundle\Templating;
 
 use Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables;
 
+use PHPMentors\PageflowerBundle\Conversation\ConversationContext;
+
 class ConversationalGlobalVariables extends GlobalVariables
 {
     /**
-     * @return PHPMentors\PageflowerBundle\Conversation\ConversationContext
+     * @return ConversationContext
      */
     public function getConversation()
     {

@@ -16,12 +16,13 @@ use PHPMentors\DomainKata\Entity\EntityInterface;
 use Stagehand\FSM\State\StateInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
+use PHPMentors\PageflowerBundle\Pageflow\Page;
 use PHPMentors\PageflowerBundle\Pageflow\Pageflow;
 
 class Conversation implements EntityInterface
 {
     /**
-     * @var \Symfony\Component\HttpFoundation\ParameterBag
+     * @var ParameterBag
      */
     public $attributes;
 
@@ -31,7 +32,7 @@ class Conversation implements EntityInterface
     private $conversationId;
 
     /**
-     * @var \PHPMentors\PageflowerBundle\Pageflow\Pageflow
+     * @var Pageflow
      */
     private $pageflow;
 
@@ -47,8 +48,8 @@ class Conversation implements EntityInterface
     private $stepCountOnEndPage;
 
     /**
-     * @param string                                         $conversationId
-     * @param \PHPMentors\PageflowerBundle\Pageflow\Pageflow $pageflow
+     * @param string   $conversationId
+     * @param Pageflow $pageflow
      */
     public function __construct($conversationId, Pageflow $pageflow)
     {
@@ -66,7 +67,7 @@ class Conversation implements EntityInterface
     }
 
     /**
-     * @return \PHPMentors\PageflowerBundle\Pageflow\Pageflow
+     * @return Pageflow
      */
     public function getPageflow()
     {
@@ -74,7 +75,7 @@ class Conversation implements EntityInterface
     }
 
     /**
-     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
+     * @return Page
      */
     public function getCurrentPage()
     {
@@ -82,7 +83,7 @@ class Conversation implements EntityInterface
     }
 
     /**
-     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
+     * @return Page
      */
     public function getPreviousPage()
     {

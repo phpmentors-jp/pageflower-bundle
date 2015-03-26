@@ -30,27 +30,27 @@ use PHPMentors\PageflowerBundle\Pageflow\PageflowRepository;
 class ConversationListener implements ConversationContextAwareInterface
 {
     /**
-     * @var \PHPMentors\PageflowerBundle\Conversation\ConversationContext
+     * @var ConversationContext
      */
     private $conversationContext;
 
     /**
-     * @var \PHPMentors\PageflowerBundle\Conversation\ConversationRepository
+     * @var ConversationRepository
      */
     private $conversationRepository;
 
     /**
-     * @var \PHPMentors\PageflowerBundle\Pageflow\PageflowRepository
+     * @var PageflowRepository
      */
     private $pageflowRepository;
 
     /**
-     * @var \PHPMentors\PageflowerBundle\Controller\ReflectionConversationalControllerRepository
+     * @var ReflectionConversationalControllerRepository
      */
     private $reflectionConversationalControllerRepository;
 
     /**
-     * @var \Symfony\Component\Security\Core\Util\SecureRandomInterface
+     * @var SecureRandomInterface
      */
     private $secureRandom;
 
@@ -61,11 +61,11 @@ class ConversationListener implements ConversationContextAwareInterface
     private $endableConversationSpecification;
 
     /**
-     * @param \PHPMentors\PageflowerBundle\Conversation\ConversationRepository                     $conversationRepository
-     * @param \PHPMentors\PageflowerBundle\Pageflow\PageflowRepository                             $pageflowRepository
-     * @param \PHPMentors\PageflowerBundle\Controller\ReflectionConversationalControllerRepository $reflectionConversationalControllerRepository
-     * @param \Symfony\Component\Security\Core\Util\SecureRandomInterface                          $secureRandom
-     * @param EndableConversationSpecification                                                     $endableConversationSpecification
+     * @param ConversationRepository                       $conversationRepository
+     * @param PageflowRepository                           $pageflowRepository
+     * @param ReflectionConversationalControllerRepository $reflectionConversationalControllerRepository
+     * @param SecureRandomInterface                        $secureRandom
+     * @param EndableConversationSpecification             $endableConversationSpecification
      */
     public function __construct(ConversationRepository $conversationRepository, PageflowRepository $pageflowRepository, ReflectionConversationalControllerRepository $reflectionConversationalControllerRepository, SecureRandomInterface $secureRandom, EndableConversationSpecification $endableConversationSpecification)
     {
@@ -85,7 +85,7 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * @param  \Symfony\Component\HttpKernel\Event\FilterControllerEvent $event
+     * @param  FilterControllerEvent     $event
      * @throws \UnexpectedValueException
      */
     public function onKernelController(FilterControllerEvent $event)
@@ -181,7 +181,7 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
+     * @param FilterResponseEvent $event
      */
     public function onKernelResponse(FilterResponseEvent $event)
     {
@@ -227,8 +227,8 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * @param  \PHPMentors\PageflowerBundle\Pageflow\Pageflow         $pageflow
-     * @return \PHPMentors\PageflowerBundle\Conversation\Conversation
+     * @param  Pageflow     $pageflow
+     * @return Conversation
      */
     private function createConversation(Pageflow $pageflow)
     {
@@ -236,8 +236,8 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * @param  \PHPMentors\PageflowerBundle\Pageflow\Pageflow $pageflow
-     * @return \PHPMentors\PageflowerBundle\Pageflow\Pageflow
+     * @param  Pageflow $pageflow
+     * @return Pageflow
      */
     private function createPageflow(Pageflow $pageflow)
     {

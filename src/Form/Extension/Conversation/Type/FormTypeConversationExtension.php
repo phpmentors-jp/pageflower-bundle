@@ -23,12 +23,12 @@ use PHPMentors\PageflowerBundle\Conversation\ConversationContextAwareInterface;
 class FormTypeConversationExtension extends AbstractTypeExtension implements ConversationContextAwareInterface
 {
     /**
-     * @var \PHPMentors\PageflowerBundle\Conversation\ConversationContext
+     * @var ConversationContext
      */
     private $conversationContext;
 
     /**
-     * @param \PHPMentors\PageflowerBundle\Conversation\ConversationContext $conversationContext
+     * @param ConversationContext $conversationContext
      */
     public function setConversationContext(ConversationContext $conversationContext)
     {

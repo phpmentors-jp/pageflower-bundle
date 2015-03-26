@@ -95,8 +95,8 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
     }
 
     /**
-     * @param  string                                                 $conversationId
-     * @return \PHPMentors\PageflowerBundle\Conversation\Conversation
+     * @param  string       $conversationId
+     * @return Conversation
      */
     public function offsetGet($conversationId)
     {
@@ -104,10 +104,10 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
     }
 
     /**
-     * @param string                                                 $conversationId
-     * @param \PHPMentors\PageflowerBundle\Conversation\Conversation $conversation
+     * @param string       $conversationId
+     * @param Conversation $conversation
      */
-    public function offsetSet($conversationId, $conversation)
+    public function offsetSet($conversationId, Conversation $conversation)
     {
         $this->conversations[$conversationId] = $conversation;
     }

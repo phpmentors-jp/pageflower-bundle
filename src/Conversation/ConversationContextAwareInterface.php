@@ -15,7 +15,7 @@ namespace PHPMentors\PageflowerBundle\Conversation;
 interface ConversationContextAwareInterface
 {
     /**
-     * @param \PHPMentors\PageflowerBundle\Conversation\ConversationContext $conversationContext
+     * @param ConversationContext $conversationContext
      */
     public function setConversationContext(ConversationContext $conversationContext);
 }

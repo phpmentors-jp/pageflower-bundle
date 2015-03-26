@@ -26,7 +26,7 @@ class Pageflow extends StateMachine implements EntityInterface
     }
 
     /**
-     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
+     * @return Page
      */
     public function getCurrentPage()
     {
@@ -34,7 +34,7 @@ class Pageflow extends StateMachine implements EntityInterface
     }
 
     /**
-     * @return \PHPMentors\PageflowerBundle\Pageflow\Page
+     * @return Page
      */
     public function getPreviousPage()
     {

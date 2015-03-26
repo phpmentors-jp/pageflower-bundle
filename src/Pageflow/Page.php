@@ -17,12 +17,12 @@ use Stagehand\FSM\State\StateInterface;
 class Page
 {
     /**
-     * @var \Stagehand\FSM\State\StateInterface
+     * @var StateInterface
      */
     private $state;
 
     /**
-     * @param \Stagehand\FSM\State\StateInterface $state
+     * @param StateInterface $state
      */
     public function __construct(StateInterface $state)
     {

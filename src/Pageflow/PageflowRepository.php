@@ -41,8 +41,8 @@ class PageflowRepository implements RepositoryInterface
     }
 
     /**
-     * @param  string                                         $pageflowId
-     * @return \PHPMentors\PageflowerBundle\Pageflow\Pageflow
+     * @param  string   $pageflowId
+     * @return Pageflow
      */
     public function findByPageflowId($pageflowId)
     {

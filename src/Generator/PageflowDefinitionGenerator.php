@@ -27,7 +27,7 @@ use PHPMentors\PageflowerBundle\Annotation\Transition;
 class PageflowDefinitionGenerator
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerBuilder
+     * @var ContainerBuilder
      */
     private $container;
 
@@ -52,11 +52,11 @@ class PageflowDefinitionGenerator
     private $pages;
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param \ReflectionClass                                        $controllerClass
-     * @param string                                                  $controllerServiceId
-     * @param \Doctrine\Common\Annotations\Reader                     $reader
-     * @param array                                                   $pages
+     * @param ContainerBuilder $container
+     * @param \ReflectionClass $controllerClass
+     * @param string           $controllerServiceId
+     * @param Reader           $reader
+     * @param array            $pages
      */
     public function __construct(ContainerBuilder $container, \ReflectionClass $controllerClass, $controllerServiceId, Reader $reader, array &$pages)
     {

@@ -36,7 +36,7 @@ class ConversationalSession extends Session
     }
 
     /**
-     * @return \PHPMentors\PageflowerBundle\Session\ConversationBag
+     * @return ConversationBag
      */
     public function getConversationBag()
     {

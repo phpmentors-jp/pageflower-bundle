@@ -18,7 +18,7 @@ use PHPMentors\DomainKata\Repository\RepositoryInterface;
 class ReflectionConversationalControllerRepository implements RepositoryInterface
 {
     /**
-     * @var \PHPMentors\PageflowerBundle\Controller\ReflectionConversationalController[]
+     * @var ReflectionConversationalController[]
      */
     private $entities = array();
 
@@ -33,8 +33,8 @@ class ReflectionConversationalControllerRepository implements RepositoryInterfac
     }
 
     /**
-     * @param  string                                                                     $class
-     * @return \PHPMentors\PageflowerBundle\Controller\ReflectionConversationalController
+     * @param  string                             $class
+     * @return ReflectionConversationalController
      */
     public function findByClass($class)
     {

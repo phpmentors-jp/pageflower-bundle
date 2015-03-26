@@ -25,9 +25,23 @@
         "symfony/routing": "~2.3",
         "symfony/security": "~2.3"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "piece/stagehand-testrunner": ">=4.0.1",
+        "symfony/browser-kit": "~2.3",
+        "symfony/css-selector": "~2.3",
+        "symfony/filesystem": "~2.3",
+        "symfony/twig-bundle": "~2.3",
+        "symfony/validator": "~2.3"
+    },
     "autoload": {
         "psr-4": {
             "PHPMentors\\PageflowerBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PHPMentors\\PageflowerBundle\\": "tests/"
         }
     },
     "extra": {

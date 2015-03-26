@@ -107,7 +107,7 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
      * @param string       $conversationId
      * @param Conversation $conversation
      */
-    public function offsetSet($conversationId, Conversation $conversation)
+    public function offsetSet($conversationId, $conversation)
     {
         $this->conversations[$conversationId] = $conversation;
     }

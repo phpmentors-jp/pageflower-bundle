@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+phpunit_config_file=
+preload_script=/pageflower-bundle/tests/bootstrap.php
+test_file_pattern=
+test_folders=/pageflower-bundle/tests
+testing_framework=PHPUnit

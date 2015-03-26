@@ -29,7 +29,6 @@ Second, add `PHPMentorsPageflowerBundle` into your bundles to register in `AppKe
 
 ```php
 ...
- 
 class AppKernel extends Kernel
 {
     public function registerBundles()

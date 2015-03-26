@@ -46,8 +46,8 @@ class ConversationContext
     private $router;
 
     /**
-     * @param string $conversationParameterName
-     * @param
+     * @param string          $conversationParameterName
+     * @param RouterInterface $router
      */
     public function __construct($conversationParameterName, RouterInterface $router)
     {

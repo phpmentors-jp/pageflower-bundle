@@ -42,7 +42,7 @@ class PageflowDefinitionGenerator
     private $controllerServiceId;
 
     /**
-     * @var \Doctrine\Common\Annotations\Reader
+     * @var Reader
      */
     private $reader;
 

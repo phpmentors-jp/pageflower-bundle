@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -13,7 +13,6 @@
 namespace PHPMentors\PageflowerBundle\Generator;
 
 use Doctrine\Common\Annotations\Reader;
-use Stagehand\FSM\State\StateInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Reference;
@@ -117,9 +116,10 @@ class PageflowDefinitionGenerator
                     throw new \LogicException(sprintf('The first element for annotation "%s" cannot be empty.', get_class($page)));
                 }
 
-                $pageflowBuilderDefinition->addMethodCall('addState', array($page->value[0]));
                 if ($page instanceof StartPage) {
-                    $pageflowBuilderDefinition->addMethodCall('setStartState', array($page->value[0]));
+                    $pageflowBuilderDefinition->addMethodCall('setStartPage', array($page->value[0]));
+                } else {
+                    $pageflowBuilderDefinition->addMethodCall('addPage', array($page->value[0]));
                 }
 
                 $this->pages[] = $page->value[0];
@@ -158,7 +158,7 @@ class PageflowDefinitionGenerator
                         throw new \LogicException(sprintf('The value for annotation "%s" cannot be empty.', get_class($transition)));
                     }
 
-                    $transitions[] = array($page->value[0], $transition->value, $transition->value);
+                    $transitions[] = array($page->value[0], $transition->value);
                 }
             } elseif ($page instanceof EndPage) {
                 $endPageFound = true;
@@ -172,8 +172,7 @@ class PageflowDefinitionGenerator
                         throw new \LogicException(sprintf('The value for annotation "%s" cannot be empty.', get_class($page)));
                     }
 
-                    $pageflowBuilderDefinition->addMethodCall('addState', array($page->value));
-                    $pageflowBuilderDefinition->addMethodCall('setEndState', array($page->value, StateInterface::STATE_FINAL));
+                    $pageflowBuilderDefinition->addMethodCall('addEndPage', array($page->value));
                     $this->pages[] = $page->value;
                 } elseif (is_array($page->value)) {
                     if (!(count($page->value) == 1 && is_string($page->value[0]))) {
@@ -188,8 +187,7 @@ class PageflowDefinitionGenerator
                         throw new \LogicException(sprintf('The value for the first element for annotation "%s" cannot be empty.', get_class($page)));
                     }
 
-                    $pageflowBuilderDefinition->addMethodCall('addState', array($page->value[0]));
-                    $pageflowBuilderDefinition->addMethodCall('setEndState', array($page->value[0], StateInterface::STATE_FINAL));
+                    $pageflowBuilderDefinition->addMethodCall('addEndPage', array($page->value[0]));
                     $this->pages[] = $page->value[0];
                 } else {
                     throw new \LogicException(sprintf(
@@ -210,12 +208,12 @@ class PageflowDefinitionGenerator
         }
 
         foreach ($transitions as $transition) {
-            if (!in_array($transition[2], $this->pages)) {
+            if (!in_array($transition[1], $this->pages)) {
                 throw new \LogicException(sprintf(
                     'The value for annotation "%s" must be a one of [ %s ], "%s" is specified.',
                     'PHPMentors\PageflowerBundle\Annotation\Transition',
                     implode(', ', array_map(function ($pageId) { return sprintf('"%s"', $pageId); }, $this->pages)),
-                    $transition[2]
+                    $transition[1]
                 ));
             }
 

@@ -34,6 +34,10 @@
         "symfony/twig-bundle": "~2.3",
         "symfony/validator": "~2.3"
     },
+    "suggest": {
+        "symfony/twig-bridge": ">=2.7.0 provides the `ConversationContext` object as `app.conversation` in Twig templates",
+        "symfony/twig-bundle": ">=2.7.0 provides the `ConversationContext` object as `app.conversation` in Twig templates"
+    },
     "autoload": {
         "psr-4": {
             "PHPMentors\\PageflowerBundle\\": "src/"

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2015 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -13,10 +13,25 @@
 namespace PHPMentors\PageflowerBundle\Templating;
 
 use PHPMentors\PageflowerBundle\Conversation\ConversationContext;
-use Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables;
+use Symfony\Bridge\Twig\AppVariable;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ConversationalGlobalVariables extends GlobalVariables
+class ConversationalAppVariable extends AppVariable implements ContainerAwareInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     /**
      * @return ConversationContext
      */

@@ -6,6 +6,7 @@
     <parameter key="phpmentors_pageflower.conversation_context.class">PHPMentors\PageflowerBundle\Conversation\ConversationContext</parameter>
     <parameter key="phpmentors_pageflower.conversation_listener.class">PHPMentors\PageflowerBundle\EventListener\ConversationListener</parameter>
     <parameter key="phpmentors_pageflower.conversation_repository.class">PHPMentors\PageflowerBundle\Conversation\ConversationRepository</parameter>
+    <parameter key="phpmentors_pageflower.conversational_app_variable.class">PHPMentors\PageflowerBundle\Templating\ConversationalAppVariable</parameter>
     <parameter key="phpmentors_pageflower.conversational_global_variables.class">PHPMentors\PageflowerBundle\Templating\ConversationalGlobalVariables</parameter>
     <parameter key="phpmentors_pageflower.conversational_session.class">PHPMentors\PageflowerBundle\Session\ConversationalSession</parameter>
     <parameter key="phpmentors_pageflower.endable_conversation_specification.class">PHPMentors\PageflowerBundle\Conversation\EndableConversationSpecification</parameter>
@@ -46,6 +47,9 @@
       <argument type="service" id="session.attribute_bag"/>
       <argument type="service" id="session.flash_bag"/>
       <argument type="service" id="phpmentors_pageflower.conversation_bag"/>
+    </service>
+    <service id="phpmentors_pageflower.conversational_app_variable" class="%phpmentors_pageflower.conversational_app_variable.class%" public="false">
+      <argument type="service" id="service_container"/>
     </service>
     <service id="phpmentors_pageflower.conversational_global_variables" class="%phpmentors_pageflower.conversational_global_variables.class%" public="false">
       <argument type="service" id="service_container"/>

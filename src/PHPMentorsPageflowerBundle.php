@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -13,6 +13,7 @@
 namespace PHPMentors\PageflowerBundle;
 
 use PHPMentors\PageflowerBundle\DependencyInjection\Compiler\GeneratePageflowDefinitionsPass;
+use PHPMentors\PageflowerBundle\DependencyInjection\Compiler\ReplaceAppVariableDefinitionPass;
 use PHPMentors\PageflowerBundle\DependencyInjection\Compiler\ReplaceSessionDefinitionPass;
 use PHPMentors\PageflowerBundle\DependencyInjection\Compiler\ReplaceTemplatingGlobalsDefinitionPass;
 use PHPMentors\PageflowerBundle\DependencyInjection\PHPMentorsPageflowerExtension;
@@ -29,6 +30,7 @@ class PHPMentorsPageflowerBundle extends Bundle
         $container->addCompilerPass(new GeneratePageflowDefinitionsPass());
         $container->addCompilerPass(new ReplaceSessionDefinitionPass());
         $container->addCompilerPass(new ReplaceTemplatingGlobalsDefinitionPass());
+        $container->addCompilerPass(new ReplaceAppVariableDefinitionPass());
     }
 
     /**

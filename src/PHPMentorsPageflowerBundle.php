@@ -12,13 +12,12 @@
 
 namespace PHPMentors\PageflowerBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
 use PHPMentors\PageflowerBundle\DependencyInjection\Compiler\GeneratePageflowDefinitionsPass;
 use PHPMentors\PageflowerBundle\DependencyInjection\Compiler\ReplaceSessionDefinitionPass;
 use PHPMentors\PageflowerBundle\DependencyInjection\Compiler\ReplaceTemplatingGlobalsDefinitionPass;
 use PHPMentors\PageflowerBundle\DependencyInjection\PHPMentorsPageflowerExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class PHPMentorsPageflowerBundle extends Bundle
 {

@@ -12,10 +12,9 @@
 
 namespace PHPMentors\PageflowerBundle\Session;
 
-use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
-
 use PHPMentors\PageflowerBundle\Conversation\Conversation;
 use PHPMentors\PageflowerBundle\Conversation\ConversationCollectionInterface;
+use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 
 class ConversationBag implements ConversationCollectionInterface, SessionBagInterface
 {
@@ -86,7 +85,8 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
     }
 
     /**
-     * @param  string $conversationId
+     * @param string $conversationId
+     *
      * @return bool
      */
     public function offsetExists($conversationId)
@@ -95,7 +95,8 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
     }
 
     /**
-     * @param  string       $conversationId
+     * @param string $conversationId
+     *
      * @return Conversation
      */
     public function offsetGet($conversationId)

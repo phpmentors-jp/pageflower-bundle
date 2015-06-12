@@ -12,13 +12,12 @@
 
 namespace PHPMentors\PageflowerBundle\Form\Extension\Conversation\Type;
 
+use PHPMentors\PageflowerBundle\Conversation\ConversationContext;
+use PHPMentors\PageflowerBundle\Conversation\ConversationContextAwareInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-
-use PHPMentors\PageflowerBundle\Conversation\ConversationContext;
-use PHPMentors\PageflowerBundle\Conversation\ConversationContextAwareInterface;
 
 class FormTypeConversationExtension extends AbstractTypeExtension implements ConversationContextAwareInterface
 {

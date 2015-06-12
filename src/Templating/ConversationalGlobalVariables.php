@@ -12,9 +12,8 @@
 
 namespace PHPMentors\PageflowerBundle\Templating;
 
-use Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables;
-
 use PHPMentors\PageflowerBundle\Conversation\ConversationContext;
+use Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables;
 
 class ConversationalGlobalVariables extends GlobalVariables
 {

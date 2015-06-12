@@ -41,7 +41,8 @@ class PageflowRepository implements RepositoryInterface
     }
 
     /**
-     * @param  string   $pageflowId
+     * @param string $pageflowId
+     *
      * @return Pageflow
      */
     public function findByPageflowId($pageflowId)

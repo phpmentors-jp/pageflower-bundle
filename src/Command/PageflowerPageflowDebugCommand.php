@@ -48,8 +48,8 @@ PHP_EOL.
             $pageflowIdMaxLength = max($pageflowIdMaxLength, strlen($pageflowId));
         }
 
-        $format  = '%-'.$pageflowIdMaxLength.'s';
-        $formatHeader  = '%-'.($pageflowIdMaxLength + 19).'s';
+        $format = '%-'.$pageflowIdMaxLength.'s';
+        $formatHeader = '%-'.($pageflowIdMaxLength + 19).'s';
         $output->writeln(sprintf($formatHeader, '<comment>Pageflow Id</comment>'));
 
         foreach ($pageflows as $pageflowId => $pageflow) {

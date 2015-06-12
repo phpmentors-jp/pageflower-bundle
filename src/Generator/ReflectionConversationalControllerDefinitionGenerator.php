@@ -13,13 +13,12 @@
 namespace PHPMentors\PageflowerBundle\Generator;
 
 use Doctrine\Common\Annotations\Reader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
-use Symfony\Component\DependencyInjection\Reference;
-
 use PHPMentors\PageflowerBundle\Annotation\Accept;
 use PHPMentors\PageflowerBundle\Annotation\Init;
 use PHPMentors\PageflowerBundle\Annotation\Stateful;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\Reference;
 
 class ReflectionConversationalControllerDefinitionGenerator
 {

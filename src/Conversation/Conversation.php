@@ -13,11 +13,10 @@
 namespace PHPMentors\PageflowerBundle\Conversation;
 
 use PHPMentors\DomainKata\Entity\EntityInterface;
-use Stagehand\FSM\State\StateInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
-
 use PHPMentors\PageflowerBundle\Pageflow\Page;
 use PHPMentors\PageflowerBundle\Pageflow\Pageflow;
+use Stagehand\FSM\State\StateInterface;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 class Conversation implements EntityInterface
 {
@@ -43,6 +42,7 @@ class Conversation implements EntityInterface
 
     /**
      * @var int
+     *
      * @since Property available since Release 1.1.0
      */
     private $stepCountOnEndPage;
@@ -118,6 +118,7 @@ class Conversation implements EntityInterface
 
     /**
      * @param int $conversationCount
+     *
      * @deprecated Deprecated since version 1.1.0, to be removed in 2.0.0.
      */
     public function increaseConversationCount()
@@ -127,6 +128,7 @@ class Conversation implements EntityInterface
 
     /**
      * @return bool
+     *
      * @since Method available since Release 1.1.0
      */
     public function onFirstStep()
@@ -136,6 +138,7 @@ class Conversation implements EntityInterface
 
     /**
      * @return bool
+     *
      * @deprecated Deprecated since version 1.1.0, to be removed in 2.0.0.
      */
     public function isFirstTime()
@@ -153,6 +156,7 @@ class Conversation implements EntityInterface
 
     /**
      * @return int
+     *
      * @since Method available since Release 1.1.0
      */
     public function getStepCount()
@@ -162,6 +166,7 @@ class Conversation implements EntityInterface
 
     /**
      * @return int|null
+     *
      * @since Method available since Release 1.1.0
      */
     public function getStepCountOnEndPage()

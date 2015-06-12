@@ -12,12 +12,11 @@
 
 namespace PHPMentors\PageflowerBundle\Conversation;
 
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
-
 use PHPMentors\PageflowerBundle\Controller\ConversationalControllerInterface;
 use PHPMentors\PageflowerBundle\Controller\ReflectionConversationalController;
 use PHPMentors\PageflowerBundle\Pageflow\Page;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class ConversationContext
 {
@@ -159,6 +158,7 @@ class ConversationContext
 
     /**
      * @return bool
+     *
      * @since Method available since Release 1.1.0
      */
     public function onFirstStep()
@@ -172,6 +172,7 @@ class ConversationContext
 
     /**
      * @return bool
+     *
      * @deprecated Deprecated since version 1.1.0, to be removed in 2.0.0.
      */
     public function isFirstTime()

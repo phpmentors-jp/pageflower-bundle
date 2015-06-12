@@ -41,7 +41,8 @@ class ConversationRepository implements RepositoryInterface
     }
 
     /**
-     * @param  string       $conversationId
+     * @param string $conversationId
+     *
      * @return Conversation
      */
     public function findByConversationId($conversationId)

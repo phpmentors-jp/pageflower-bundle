@@ -33,7 +33,8 @@ class ReflectionConversationalControllerRepository implements RepositoryInterfac
     }
 
     /**
-     * @param  string                             $class
+     * @param string $class
+     *
      * @return ReflectionConversationalController
      */
     public function findByClass($class)

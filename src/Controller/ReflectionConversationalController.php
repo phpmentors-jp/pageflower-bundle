@@ -58,7 +58,8 @@ class ReflectionConversationalController implements EntityInterface
     }
 
     /**
-     * @param  string $method
+     * @param string $method
+     *
      * @return array
      */
     public function getAcceptablePages($method)

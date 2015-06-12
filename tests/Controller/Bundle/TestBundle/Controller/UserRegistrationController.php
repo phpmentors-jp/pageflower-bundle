@@ -12,11 +12,6 @@
 
 namespace PHPMentors\PageflowerBundle\Controller\Bundle\TestBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-
 use PHPMentors\PageflowerBundle\Annotation\Accept;
 use PHPMentors\PageflowerBundle\Annotation\EndPage;
 use PHPMentors\PageflowerBundle\Annotation\Init;
@@ -29,6 +24,10 @@ use PHPMentors\PageflowerBundle\Controller\Bundle\TestBundle\Entity\User;
 use PHPMentors\PageflowerBundle\Controller\Bundle\TestBundle\Form\Type\UserRegistrationType;
 use PHPMentors\PageflowerBundle\Controller\ConversationalControllerInterface;
 use PHPMentors\PageflowerBundle\Conversation\ConversationContext;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @since Class available since Release 1.1.0
@@ -86,7 +85,8 @@ class UserRegistrationController extends Controller implements ConversationalCon
     }
 
     /**
-     * @param  Request  $request
+     * @param Request $request
+     *
      * @return Response
      *
      * @Accept("input")

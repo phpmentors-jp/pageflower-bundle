@@ -13,15 +13,14 @@
 namespace PHPMentors\PageflowerBundle\Generator;
 
 use Doctrine\Common\Annotations\Reader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\DefinitionDecorator;
-use Symfony\Component\DependencyInjection\Reference;
-
 use PHPMentors\PageflowerBundle\Annotation\EndPage;
 use PHPMentors\PageflowerBundle\Annotation\Page;
 use PHPMentors\PageflowerBundle\Annotation\PageAnnotationInterface;
 use PHPMentors\PageflowerBundle\Annotation\StartPage;
 use PHPMentors\PageflowerBundle\Annotation\Transition;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
+use Symfony\Component\DependencyInjection\Reference;
 
 class PageflowDefinitionGenerator
 {

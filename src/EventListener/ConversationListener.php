@@ -12,12 +12,6 @@
 
 namespace PHPMentors\PageflowerBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\Security\Core\Util\SecureRandomInterface;
-
 use PHPMentors\PageflowerBundle\Controller\ReflectionConversationalControllerRepository;
 use PHPMentors\PageflowerBundle\Conversation\Conversation;
 use PHPMentors\PageflowerBundle\Conversation\ConversationContext;
@@ -26,6 +20,11 @@ use PHPMentors\PageflowerBundle\Conversation\ConversationRepository;
 use PHPMentors\PageflowerBundle\Conversation\EndableConversationSpecification;
 use PHPMentors\PageflowerBundle\Pageflow\Pageflow;
 use PHPMentors\PageflowerBundle\Pageflow\PageflowRepository;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\Security\Core\Util\SecureRandomInterface;
 
 class ConversationListener implements ConversationContextAwareInterface
 {
@@ -56,6 +55,7 @@ class ConversationListener implements ConversationContextAwareInterface
 
     /**
      * @var EndableConversationSpecification
+     *
      * @since Property available since Release 1.1.0
      */
     private $endableConversationSpecification;
@@ -85,7 +85,8 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * @param  FilterControllerEvent     $event
+     * @param FilterControllerEvent $event
+     *
      * @throws \UnexpectedValueException
      */
     public function onKernelController(FilterControllerEvent $event)
@@ -227,7 +228,8 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * @param  Pageflow     $pageflow
+     * @param Pageflow $pageflow
+     *
      * @return Conversation
      */
     private function createConversation(Pageflow $pageflow)
@@ -236,7 +238,8 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * @param  Pageflow $pageflow
+     * @param Pageflow $pageflow
+     *
      * @return Pageflow
      */
     private function createPageflow(Pageflow $pageflow)

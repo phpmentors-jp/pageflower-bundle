@@ -50,7 +50,9 @@
     <service id="phpmentors_pageflower.conversational_global_variables" class="%phpmentors_pageflower.conversational_global_variables.class%" public="false">
       <argument type="service" id="service_container"/>
     </service>
-    <service id="phpmentors_pageflower.pageflow" class="%phpmentors_pageflower.pageflow.class%" abstract="true" factory-service="phpmentors_pageflower.pageflow_builder" factory-method="build" public="false"/>
+    <service id="phpmentors_pageflower.pageflow" class="%phpmentors_pageflower.pageflow.class%" abstract="true" public="false">
+        <factory service="phpmentors_pageflower.pageflow_builder" method="build"/>
+    </service>
     <service id="phpmentors_pageflower.pageflow_builder" class="%phpmentors_pageflower.pageflow_builder.class%" abstract="true" public="false"/>
     <service id="phpmentors_pageflower.pageflow_repository" class="%phpmentors_pageflower.pageflow_repository.class%"/>
     <service id="phpmentors_pageflower.reflection_conversational_controller" class="%phpmentors_pageflower.reflection_conversational_controller.class%" abstract="true" public="false"/>

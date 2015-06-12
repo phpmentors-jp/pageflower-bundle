@@ -223,8 +223,9 @@ class PageflowDefinitionGenerator
         $pageflowBuilderServiceId = 'phpmentors_pageflower.pageflow_builder.'.$this->controllerServiceId;
         $this->container->setDefinition($pageflowBuilderServiceId, $pageflowBuilderDefinition);
 
+        $pageflowFactory = $this->container->getDefinition('phpmentors_pageflower.pageflow')->getFactory();
         $pageflowDefinition = new DefinitionDecorator('phpmentors_pageflower.pageflow');
-        $pageflowDefinition->setFactory(array(new Reference($pageflowBuilderServiceId), 'build'));
+        $pageflowDefinition->setFactory(array(new Reference($pageflowBuilderServiceId), $pageflowFactory[1]));
         $pageflowServiceId = 'phpmentors_pageflower.pageflow.'.$this->controllerServiceId;
         $this->container->setDefinition($pageflowServiceId, $pageflowDefinition);
         $this->container->getDefinition('phpmentors_pageflower.pageflow_repository')->addMethodCall('add', array(new Reference($pageflowServiceId)));

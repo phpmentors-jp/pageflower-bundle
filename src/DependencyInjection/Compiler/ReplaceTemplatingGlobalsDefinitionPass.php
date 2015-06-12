@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2014 KUBO Atsuhiro <kubo@iteman.jp>,
+ * Copyright (c) 2014-2015 KUBO Atsuhiro <kubo@iteman.jp>,
  * All rights reserved.
  *
  * This file is part of PHPMentorsPageflowerBundle.
@@ -22,7 +22,13 @@ class ReplaceTemplatingGlobalsDefinitionPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $container->setDefinition('templating.globals', $container->getDefinition('phpmentors_pageflower.conversational_global_variables'));
-        $container->removeDefinition('phpmentors_pageflower.conversational_global_variables');
+        if ($container->hasDefinition('templating.globals')) {
+            foreach ($container->getDefinition('templating.globals')->getMethodCalls() as $methodCall) {
+                list($method, $arguments) = $methodCall;
+                $container->getDefinition('phpmentors_pageflower.conversational_global_variables')->addMethodCall($method, $arguments);
+            }
+
+            $container->setAlias('templating.globals', 'phpmentors_pageflower.conversational_global_variables');
+        }
     }
 }

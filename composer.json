@@ -17,7 +17,7 @@
         "piece/stagehand-fsm": "~2.1",
         "symfony/config": "~2.3",
         "symfony/console": "~2.3",
-        "symfony/dependency-injection": "~2.3",
+        "symfony/dependency-injection": "~2.6",
         "symfony/form": "~2.3",
         "symfony/framework-bundle": "~2.3",
         "symfony/http-foundation": "~2.3",

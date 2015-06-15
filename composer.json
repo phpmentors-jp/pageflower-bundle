@@ -23,7 +23,8 @@
         "symfony/http-foundation": "~2.7",
         "symfony/http-kernel": "~2.7",
         "symfony/routing": "~2.7",
-        "symfony/security": "~2.7"
+        "symfony/security": "~2.7",
+        "symfony/validator": "~2.7"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
@@ -32,8 +33,7 @@
         "symfony/css-selector": "~2.7",
         "symfony/filesystem": "~2.7",
         "symfony/twig-bridge": "~2.7",
-        "symfony/twig-bundle": "~2.7",
-        "symfony/validator": "~2.7"
+        "symfony/twig-bundle": "~2.7"
     },
     "suggest": {
         "symfony/twig-bridge": ">=2.7.0 provides the `ConversationContext` object as `app.conversation` in Twig templates",

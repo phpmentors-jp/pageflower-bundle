@@ -29,7 +29,7 @@ class PHPMentorsPageflowerExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(dirname(__DIR__).'/Resources/config'));
         $loader->load('services.xml');
 
-        $this->transformConfigToContainerParameters($config, $container);
+        $this->transformConfigToContainer($config, $container);
     }
 
     /**
@@ -44,7 +44,7 @@ class PHPMentorsPageflowerExtension extends Extension
      * @param array            $config
      * @param ContainerBuilder $container
      */
-    private function transformConfigToContainerParameters(array $config, ContainerBuilder $container)
+    private function transformConfigToContainer(array $config, ContainerBuilder $container)
     {
         $container->setParameter('phpmentors_pageflower.conversation_request_parameter_name', $config['conversation']['request_parameter_name']);
         $container->setParameter('phpmentors_pageflower.conversation_session_storage_key', $config['conversation']['session_storage_name']);

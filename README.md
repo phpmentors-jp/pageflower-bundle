@@ -22,6 +22,14 @@ A pageflow engine for Symfony applications
 
 First, add the dependency to `phpmentors/pageflower-bundle` into your `composer.json` file as the following:
 
+Stable version:
+
+```
+composer require phpmentors/pageflower-bundle "1.1.*"
+```
+
+Development version:
+
 ```
 composer require phpmentors/pageflower-bundle "~1.2@dev"
 ```

@@ -58,7 +58,7 @@
         <factory service="phpmentors_pageflower.pageflow_builder" method="build"/>
     </service>
     <service id="phpmentors_pageflower.pageflow_builder" class="%phpmentors_pageflower.pageflow_builder.class%" abstract="true" public="false"/>
-    <service id="phpmentors_pageflower.pageflow_repository" class="%phpmentors_pageflower.pageflow_repository.class%"/>
+    <service id="phpmentors_pageflower.pageflow_repository" class="%phpmentors_pageflower.pageflow_repository.class%" public="false"/>
     <service id="phpmentors_pageflower.reflection_conversational_controller" class="%phpmentors_pageflower.reflection_conversational_controller.class%" abstract="true" public="false"/>
     <service id="phpmentors_pageflower.reflection_conversational_controller_repository" class="%phpmentors_pageflower.reflection_conversational_controller_repository.class%" public="false"/>
     <service id="phpmentors_pageflower.endable_conversation_specification" class="%phpmentors_pageflower.endable_conversation_specification.class%" public="false">

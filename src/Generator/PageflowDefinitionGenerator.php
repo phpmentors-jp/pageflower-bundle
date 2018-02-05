@@ -18,6 +18,7 @@ use PHPMentors\PageflowerBundle\Annotation\Page;
 use PHPMentors\PageflowerBundle\Annotation\PageAnnotationInterface;
 use PHPMentors\PageflowerBundle\Annotation\StartPage;
 use PHPMentors\PageflowerBundle\Annotation\Transition;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Reference;
@@ -79,7 +80,7 @@ class PageflowDefinitionGenerator
             ));
         }
 
-        $pageflowBuilderDefinition = new DefinitionDecorator('phpmentors_pageflower.pageflow_builder');
+        $pageflowBuilderDefinition = class_exists('Symfony\Component\DependencyInjection\ChildDefinition') ? new ChildDefinition('phpmentors_pageflower.pageflow_builder') : new DefinitionDecorator('phpmentors_pageflower.pageflow_builder');
         $pageflowBuilderDefinition->setArguments(array($this->controllerServiceId));
 
         $startPageFound = false;
@@ -223,12 +224,16 @@ class PageflowDefinitionGenerator
         $this->container->setDefinition($pageflowBuilderServiceId, $pageflowBuilderDefinition);
 
         $pageflowFactory = $this->container->getDefinition('phpmentors_pageflower.pageflow')->getFactory();
-        $pageflowDefinition = new DefinitionDecorator('phpmentors_pageflower.pageflow');
+        $pageflowDefinition = class_exists('Symfony\Component\DependencyInjection\ChildDefinition') ? new ChildDefinition('phpmentors_pageflower.pageflow') : new DefinitionDecorator('phpmentors_pageflower.pageflow');
         $pageflowDefinition->setFactory(array(new Reference($pageflowBuilderServiceId), $pageflowFactory[1]));
         $pageflowServiceId = 'phpmentors_pageflower.pageflow.'.$this->controllerServiceId;
         $this->container->setDefinition($pageflowServiceId, $pageflowDefinition);
         $this->container->getDefinition('phpmentors_pageflower.pageflow_repository')->addMethodCall('add', array(new Reference($pageflowServiceId)));
 
-        $this->container->addClassResource($this->controllerClass);
+        if (method_exists($this->container, 'addObjectResource')) {
+            $this->container->addObjectResource($this->controllerClass);
+        } else {
+            $this->container->addClassResource($this->controllerClass);
+        }
     }
 }

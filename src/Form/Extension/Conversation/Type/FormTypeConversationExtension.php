@@ -54,7 +54,7 @@ class FormTypeConversationExtension extends AbstractTypeExtension implements Con
         if ($conversation !== null && !$view->parent && $options['compound']) {
             $conversationForm = $conversationForm->getConfig()->getAttribute('conversation_factory')->createNamed(
                 $this->conversationContext->getConversationParameterName(),
-                'hidden',
+                'Symfony\Component\Form\Extension\Core\Type\HiddenType',
                 $conversation->getConversationId(),
                 array('mapped' => false)
             );
@@ -70,6 +70,7 @@ class FormTypeConversationExtension extends AbstractTypeExtension implements Con
      */
     public function getExtendedType()
     {
+        return 'Symfony\Component\Form\Extension\Core\Type\FormType';
         return 'form';
     }
 }

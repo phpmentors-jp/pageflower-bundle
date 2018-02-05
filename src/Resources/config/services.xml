@@ -33,7 +33,7 @@
       <argument type="service" id="phpmentors_pageflower.conversation_repository"/>
       <argument type="service" id="phpmentors_pageflower.pageflow_repository"/>
       <argument type="service" id="phpmentors_pageflower.reflection_conversational_controller_repository"/>
-      <argument type="service" id="security.secure_random"/>
+      <argument type="service" id="security.secure_random" on-invalid="ignore"/>
       <argument type="service" id="phpmentors_pageflower.endable_conversation_specification"/>
       <call method="setConversationContext">
         <argument type="service" id="phpmentors_pageflower.conversation_context"/>
@@ -68,7 +68,7 @@
       <call method="setConversationContext">
         <argument type="service" id="phpmentors_pageflower.conversation_context"/>
       </call>
-      <tag name="form.type_extension" alias="form"/>
+      <tag name="form.type_extension" alias="form" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType"/>
     </service>
   </services>
 </container>

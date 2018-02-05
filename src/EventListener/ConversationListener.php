@@ -67,7 +67,7 @@ class ConversationListener implements ConversationContextAwareInterface
      * @param SecureRandomInterface                        $secureRandom
      * @param EndableConversationSpecification             $endableConversationSpecification
      */
-    public function __construct(ConversationRepository $conversationRepository, PageflowRepository $pageflowRepository, ReflectionConversationalControllerRepository $reflectionConversationalControllerRepository, SecureRandomInterface $secureRandom, EndableConversationSpecification $endableConversationSpecification)
+    public function __construct(ConversationRepository $conversationRepository, PageflowRepository $pageflowRepository, ReflectionConversationalControllerRepository $reflectionConversationalControllerRepository, SecureRandomInterface $secureRandom = null, EndableConversationSpecification $endableConversationSpecification)
     {
         $this->conversationRepository = $conversationRepository;
         $this->pageflowRepository = $pageflowRepository;
@@ -252,6 +252,6 @@ class ConversationListener implements ConversationContextAwareInterface
      */
     private function generateConversationId()
     {
-        return sha1($this->secureRandom->nextBytes(24));
+        return sha1($this->secureRandom === null ? random_bytes(24) : $this->secureRandom->nextBytes(24));
     }
 }

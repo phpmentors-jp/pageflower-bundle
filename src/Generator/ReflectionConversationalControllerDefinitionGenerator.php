@@ -16,6 +16,7 @@ use Doctrine\Common\Annotations\Reader;
 use PHPMentors\PageflowerBundle\Annotation\Accept;
 use PHPMentors\PageflowerBundle\Annotation\Init;
 use PHPMentors\PageflowerBundle\Annotation\Stateful;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Reference;
@@ -68,7 +69,7 @@ class ReflectionConversationalControllerDefinitionGenerator
      */
     public function generate()
     {
-        $definition = new DefinitionDecorator('phpmentors_pageflower.reflection_conversational_controller');
+        $definition = class_exists('Symfony\Component\DependencyInjection\ChildDefinition') ? new ChildDefinition('phpmentors_pageflower.reflection_conversational_controller') : new DefinitionDecorator('phpmentors_pageflower.reflection_conversational_controller');
         $definition->setArguments(array($this->controllerClass->getName()));
 
         foreach ($this->controllerClass->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) { /* @var $method \ReflectionMethod */

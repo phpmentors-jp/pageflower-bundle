@@ -30,6 +30,8 @@ class ConversationalControllerTest extends WebTestCase
         parent::setUp();
 
         $_SERVER['KERNEL_DIR'] = __DIR__.'/app';
+        include_once __DIR__.'/app/AppKernel.php';
+        $_SERVER['KERNEL_CLASS'] = 'AppKernel';
         $this->removeCacheDir();
     }
 
@@ -48,7 +50,7 @@ class ConversationalControllerTest extends WebTestCase
      */
     protected static function createKernel(array $options = array())
     {
-        $kernel = KernelTestCase::createKernel($options);
+        $kernel = parent::createKernel($options);
 
         if (array_key_exists('config', $options)) {
             $kernel->setConfig($options['config']);

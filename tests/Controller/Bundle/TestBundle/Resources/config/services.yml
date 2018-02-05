@@ -12,3 +12,4 @@ services:
             - [setConversationContext, ["@phpmentors_pageflower.conversation_context"]]
         tags:
             - { name: phpmentors_pageflower.pageflow }
+            - { name: controller.service_arguments }

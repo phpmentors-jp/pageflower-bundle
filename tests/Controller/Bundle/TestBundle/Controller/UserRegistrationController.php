@@ -98,7 +98,8 @@ class UserRegistrationController extends Controller implements ConversationalCon
             $this->conversationContext->getConversation()->transition('input');
         }
 
-        $form = $this->createForm(new UserRegistrationType(), $this->user, array(
+        $form = $this->createForm('PHPMentors\PageflowerBundle\Controller\Bundle\TestBundle\Form\Type\UserRegistrationType', $this->user, array(
+//        $form = $this->createForm(new UserRegistrationType(), $this->user, array(
             'action' => $this->generateUrl('test_user_registration_input_post'),
             'method' => 'POST',
         ));
@@ -115,7 +116,7 @@ class UserRegistrationController extends Controller implements ConversationalCon
      */
     public function inputPostAction(Request $request)
     {
-        $form = $this->createForm(new UserRegistrationType(), $this->user, array(
+        $form = $this->createForm('PHPMentors\PageflowerBundle\Controller\Bundle\TestBundle\Form\Type\UserRegistrationType', $this->user, array(
             'action' => $this->generateUrl('test_user_registration_input_post'),
             'method' => 'POST',
         ));
@@ -140,8 +141,8 @@ class UserRegistrationController extends Controller implements ConversationalCon
     public function confirmationGetAction(Request $request)
     {
         $form = $this->createFormBuilder(null, array('action' => $this->generateUrl('test_user_registration_confirmation_post'), 'method' => 'POST'))
-            ->add('next', 'submit')
-            ->add('prev', 'submit')
+            ->add('next', 'Symfony\Component\Form\Extension\Core\Type\SubmitType')
+            ->add('prev', 'Symfony\Component\Form\Extension\Core\Type\SubmitType')
             ->getForm();
 
         return $this->render(self::VIEW_CONFIRMATION, array(
@@ -157,8 +158,8 @@ class UserRegistrationController extends Controller implements ConversationalCon
     public function confirmationPostAction(Request $request)
     {
         $form = $this->createFormBuilder(null, array('action' => $this->generateUrl('test_user_registration_confirmation_post'), 'method' => 'POST'))
-            ->add('next', 'submit')
-            ->add('prev', 'submit')
+            ->add('next', 'Symfony\Component\Form\Extension\Core\Type\SubmitType')
+            ->add('prev', 'Symfony\Component\Form\Extension\Core\Type\SubmitType')
             ->getForm();
         $form->handleRequest($request);
 

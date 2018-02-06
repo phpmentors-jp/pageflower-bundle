@@ -55,7 +55,7 @@ If you find a bug or have a question, or want to request a feature, create an is
 
 ## Copyright
 
-Copyright (c) 2014-2015, 2018 KUBO Atsuhiro, All rights reserved.
+Copyright (c) 2014-2015, 2018 Atsuhiro Kubo, All rights reserved.
 
 ## License
 

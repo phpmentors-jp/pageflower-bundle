@@ -99,7 +99,6 @@ class UserRegistrationController extends Controller implements ConversationalCon
         }
 
         $form = $this->createForm('PHPMentors\PageflowerBundle\Controller\Bundle\TestBundle\Form\Type\UserRegistrationType', $this->user, array(
-//        $form = $this->createForm(new UserRegistrationType(), $this->user, array(
             'action' => $this->generateUrl('test_user_registration_input_post'),
             'method' => 'POST',
         ));

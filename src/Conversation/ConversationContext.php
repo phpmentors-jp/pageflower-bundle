@@ -120,11 +120,9 @@ class ConversationContext
             $route = $this->router->getRouteCollection()->get($routeName);
             if ($route !== null) {
                 $controllerName = $route->getDefault('_controller');
-                if (strpos($controllerName, '::') === false && substr_count($controllerName, ':') == 1) {
-                    $controllerServiceId = substr($controllerName, 0, strpos($controllerName, ':'));
-                    if ($controllerServiceId == $this->conversation->getPageflow()->getPageflowId()) {
-                        $parameters[$this->conversationParameterName] = $this->conversation->getConversationId();
-                    }
+                $controllerServiceId = substr($controllerName, 0, strpos($controllerName, ':'));
+                if ($controllerServiceId == $this->conversation->getPageflow()->getPageflowId()) {
+                    $parameters[$this->conversationParameterName] = $this->conversation->getConversationId();
                 }
             }
         }

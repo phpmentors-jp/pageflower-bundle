@@ -93,90 +93,90 @@ class ConversationListener implements ConversationContextAwareInterface
     {
         if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
             $controllerName = $event->getRequest()->attributes->get('_controller');
-            if (strpos($controllerName, '::') === false && substr_count($controllerName, ':') == 1) {
-                $pageflowId = substr($controllerName, 0, strpos($controllerName, ':'));
-                $pageflow = $this->pageflowRepository->findByPageflowId($pageflowId);
-                if ($pageflow !== null) {
-                    list($conversationalController, $action) = $event->getController();
+            $pageflowId = substr($controllerName, 0, strpos($controllerName, ':'));
+            $pageflow = $this->pageflowRepository->findByPageflowId($pageflowId);
+            if ($pageflow !== null) {
+                list($conversationalController, $action) = $event->getController();
 
-                    $this->conversationRepository->setConversationCollection($event->getRequest()->getSession()->getConversationBag());
+                $this->conversationRepository->setConversationCollection($event->getRequest()->getSession()->getConversationBag());
 
-                    if ($event->getRequest()->request->has($this->conversationContext->getConversationParameterName())) {
-                        $conversationId = $event->getRequest()->request->get($this->conversationContext->getConversationParameterName());
-                    } elseif ($event->getRequest()->query->has($this->conversationContext->getConversationParameterName())) {
-                        $conversationId = $event->getRequest()->query->get($this->conversationContext->getConversationParameterName());
-                    }
+                if ($event->getRequest()->request->has($this->conversationContext->getConversationParameterName())) {
+                    $conversationId = $event->getRequest()->request->get($this->conversationContext->getConversationParameterName());
+                } elseif ($event->getRequest()->query->has($this->conversationContext->getConversationParameterName())) {
+                    $conversationId = $event->getRequest()->query->get($this->conversationContext->getConversationParameterName());
+                }
 
-                    if (isset($conversationId)) {
-                        $conversation = $this->conversationRepository->findByConversationId($conversationId);
-                    }
+                if (isset($conversationId)) {
+                    $conversation = $this->conversationRepository->findByConversationId($conversationId);
+                }
 
-                    if (!isset($conversation)) {
-                        $conversation = $this->createConversation($pageflow);
-                        $conversation->start();
+                if (!isset($conversation)) {
+                    $conversation = $this->createConversation($pageflow);
+                    $conversation->start();
 
-                        $reflectionConversationalController = $this->reflectionConversationalControllerRepository->findByClass(get_class($conversationalController));
-                        if ($reflectionConversationalController === null) {
-                            throw new \UnexpectedValueException(sprintf(
-                                'ReflectionConversationalController object for controller "%s" is not found.',
-                                get_class($conversationalController)
-                            ));
-                        }
-
-                        foreach ($reflectionConversationalController->getInitMethods() as $initMethod) { /* @var $initMethod \ReflectionMethod */
-                            if (is_callable(array($conversationalController, $initMethod->getName()))) {
-                                $initMethod->invoke($conversationalController);
-                            } else {
-                                throw new \UnexpectedValueException(sprintf(
-                                    'Init method "%s" for pageflow "%s" is not callable.',
-                                    get_class($conversationalController).'::'.$initMethod->getName(),
-                                    $pageflow->getPageflowId()
-                                ));
-                            }
-                        }
-
-                        $this->conversationRepository->add($conversation);
-                    }
-
-                    $conversation->increaseStepCount();
-
-                    if (!isset($reflectionConversationalController)) {
-                        $reflectionConversationalController = $this->reflectionConversationalControllerRepository->findByClass(get_class($conversationalController));
-                        if ($reflectionConversationalController === null) {
-                            throw new \UnexpectedValueException(sprintf(
-                                'ReflectionConversationalController object for controller "%s" is not found.',
-                                get_class($conversationalController)
-                            ));
-                        }
-                    }
-
-                    if (!in_array($conversation->getCurrentPage()->getPageId(), $reflectionConversationalController->getAcceptablePages($action))) {
-                        throw new AccessDeniedHttpException(sprintf(
-                            'Controller "%s" should be accessed when the current page is one of [ %s ], the actual page is "%s".',
-                            get_class($conversationalController).'::'.$action,
-                            implode(', ', $reflectionConversationalController->getAcceptablePages($action)),
-                            $conversation->getCurrentPage()->getPageId()
+                    $reflectionConversationalController = $this->reflectionConversationalControllerRepository->findByClass(get_class($conversationalController));
+                    if ($reflectionConversationalController === null) {
+                        throw new \UnexpectedValueException(sprintf(
+                            'ReflectionConversationalController object for controller "%s" is not found.',
+                            get_class($conversationalController)
                         ));
                     }
 
-                    foreach ($reflectionConversationalController->getStatefulProperties() as $statefulProperty) { /* @var $statefulProperty \ReflectionProperty */
-                        if ($conversation->attributes->has($statefulProperty->getName())) {
-                            if (!$statefulProperty->isPublic()) {
-                                $statefulProperty->setAccessible(true);
-                            }
-
-                            $statefulProperty->setValue($conversationalController, $conversation->attributes->get($statefulProperty->getName()));
-
-                            if (!$statefulProperty->isPublic()) {
-                                $statefulProperty->setAccessible(false);
-                            }
+                    foreach ($reflectionConversationalController->getInitMethods() as $initMethod) {
+                        /* @var $initMethod \ReflectionMethod */
+                        if (is_callable(array($conversationalController, $initMethod->getName()))) {
+                            $initMethod->invoke($conversationalController);
+                        } else {
+                            throw new \UnexpectedValueException(sprintf(
+                                'Init method "%s" for pageflow "%s" is not callable.',
+                                get_class($conversationalController) . '::' . $initMethod->getName(),
+                                $pageflow->getPageflowId()
+                            ));
                         }
                     }
 
-                    $this->conversationContext->setConversation($conversation);
-                    $this->conversationContext->setConversationalController($conversationalController);
-                    $this->conversationContext->setReflectionConversationalController($reflectionConversationalController);
+                    $this->conversationRepository->add($conversation);
                 }
+
+                $conversation->increaseStepCount();
+
+                if (!isset($reflectionConversationalController)) {
+                    $reflectionConversationalController = $this->reflectionConversationalControllerRepository->findByClass(get_class($conversationalController));
+                    if ($reflectionConversationalController === null) {
+                        throw new \UnexpectedValueException(sprintf(
+                            'ReflectionConversationalController object for controller "%s" is not found.',
+                            get_class($conversationalController)
+                        ));
+                    }
+                }
+
+                if (!in_array($conversation->getCurrentPage()->getPageId(), $reflectionConversationalController->getAcceptablePages($action))) {
+                    throw new AccessDeniedHttpException(sprintf(
+                        'Controller "%s" should be accessed when the current page is one of [ %s ], the actual page is "%s".',
+                        get_class($conversationalController) . '::' . $action,
+                        implode(', ', $reflectionConversationalController->getAcceptablePages($action)),
+                        $conversation->getCurrentPage()->getPageId()
+                    ));
+                }
+
+                foreach ($reflectionConversationalController->getStatefulProperties() as $statefulProperty) {
+                    /* @var $statefulProperty \ReflectionProperty */
+                    if ($conversation->attributes->has($statefulProperty->getName())) {
+                        if (!$statefulProperty->isPublic()) {
+                            $statefulProperty->setAccessible(true);
+                        }
+
+                        $statefulProperty->setValue($conversationalController, $conversation->attributes->get($statefulProperty->getName()));
+
+                        if (!$statefulProperty->isPublic()) {
+                            $statefulProperty->setAccessible(false);
+                        }
+                    }
+                }
+
+                $this->conversationContext->setConversation($conversation);
+                $this->conversationContext->setConversationalController($conversationalController);
+                $this->conversationContext->setReflectionConversationalController($reflectionConversationalController);
             }
         }
     }

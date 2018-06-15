@@ -49,7 +49,7 @@
       <argument type="service" id="phpmentors_pageflower.conversation_bag"/>
     </service>
     <service id="phpmentors_pageflower.conversational_app_variable" class="%phpmentors_pageflower.conversational_app_variable.class%" public="false">
-      <argument type="service" id="service_container"/>
+      <argument type="service" id="phpmentors_pageflower.conversation_context"/>
     </service>
     <service id="phpmentors_pageflower.conversational_global_variables" class="%phpmentors_pageflower.conversational_global_variables.class%" public="false">
       <argument type="service" id="service_container"/>

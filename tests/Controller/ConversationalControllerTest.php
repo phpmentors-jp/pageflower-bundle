@@ -78,7 +78,11 @@ class ConversationalControllerTest extends WebTestCase
         $this->assertThat($client->getResponse()->getStatusCode(), $this->equalTo(200));
         $this->assertThat($client->getCrawler()->filter('title')->text(), $this->stringContains('input'));
 
-        $client->submit($client->getCrawler()->selectButton('user_registration[next]')->form());
+        $form = $client->getCrawler()->selectButton('user_registration[next]')->form();
+        $form['user_registration[firstName]'] = 'Atsuhiro';
+        $form['user_registration[lastName]'] = 'Kubo';
+
+        $client->submit($form);
 
         $this->assertThat($client->getResponse()->getStatusCode(), $this->equalTo(302));
 
@@ -86,6 +90,8 @@ class ConversationalControllerTest extends WebTestCase
 
         $this->assertThat($client->getResponse()->getStatusCode(), $this->equalTo(200));
         $this->assertThat($client->getCrawler()->filter('title')->text(), $this->stringContains('confirmation'));
+        $this->assertThat($client->getCrawler()->filterXpath('//*[@id="first_name"]')->text(), $this->stringContains('Atsuhiro'));
+        $this->assertThat($client->getCrawler()->filterXpath('//*[@id="last_name"]')->text(), $this->stringContains('Kubo'));
 
         $client->submit($client->getCrawler()->selectButton('form[next]')->form());
 

@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class PHPMentorsPageflowerBundle extends Bundle
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
     {
@@ -34,7 +34,7 @@ class PHPMentorsPageflowerBundle extends Bundle
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getContainerExtension()
     {

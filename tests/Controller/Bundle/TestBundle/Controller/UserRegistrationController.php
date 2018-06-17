@@ -21,7 +21,6 @@ use PHPMentors\PageflowerBundle\Annotation\StartPage;
 use PHPMentors\PageflowerBundle\Annotation\Stateful;
 use PHPMentors\PageflowerBundle\Annotation\Transition;
 use PHPMentors\PageflowerBundle\Controller\Bundle\TestBundle\Entity\User;
-use PHPMentors\PageflowerBundle\Controller\Bundle\TestBundle\Form\Type\UserRegistrationType;
 use PHPMentors\PageflowerBundle\Controller\ConversationalControllerInterface;
 use PHPMentors\PageflowerBundle\Conversation\ConversationContext;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -69,7 +68,7 @@ class UserRegistrationController extends Controller implements ConversationalCon
     private $form;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setConversationContext(ConversationContext $conversationContext)
     {

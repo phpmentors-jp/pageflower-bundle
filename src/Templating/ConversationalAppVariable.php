@@ -14,22 +14,24 @@ namespace PHPMentors\PageflowerBundle\Templating;
 
 use PHPMentors\PageflowerBundle\Conversation\ConversationContext;
 use Symfony\Bridge\Twig\AppVariable;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ConversationalAppVariable extends AppVariable implements ContainerAwareInterface
+class ConversationalAppVariable extends AppVariable
 {
     /**
-     * @var ContainerInterface
+     * @var ConversationContext
+     *
+     * @since Property available since Release 1.4.0
      */
-    private $container;
+    private $conversationContext;
 
     /**
-     * {@inheritDoc}
+     * @param ConversationContext $conversationContext
+     *
+     * @since Method available since Release 1.4.0
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function __construct(ConversationContext $conversationContext)
     {
-        $this->container = $container;
+        $this->conversationContext = $conversationContext;
     }
 
     /**
@@ -37,6 +39,6 @@ class ConversationalAppVariable extends AppVariable implements ContainerAwareInt
      */
     public function getConversation()
     {
-        return $this->container->get('phpmentors_pageflower.conversation_context');
+        return $this->conversationContext;
     }
 }

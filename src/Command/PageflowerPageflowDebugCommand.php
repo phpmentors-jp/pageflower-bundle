@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PageflowerPageflowDebugCommand extends ContainerAwareCommand
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -34,7 +34,7 @@ PHP_EOL.
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

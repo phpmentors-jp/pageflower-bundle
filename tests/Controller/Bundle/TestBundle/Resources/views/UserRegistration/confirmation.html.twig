@@ -3,6 +3,10 @@
 {% block title %}confirmation{% endblock %}
 
 {% block body %}
+
+<div id="first_name">{{ app.conversation.conversation.attributes.get('user').firstName }}</div>
+<div id="last_name">{{ app.conversation.conversation.attributes.get('user').lastName }}</div>
+
 {{ form_start(form) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}

@@ -23,7 +23,7 @@ class ConversationRepository implements RepositoryInterface
     private $conversationCollection;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function add(EntityInterface $entity)
     {
@@ -51,7 +51,7 @@ class ConversationRepository implements RepositoryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function remove(EntityInterface $entity)
     {

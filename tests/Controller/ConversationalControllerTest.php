@@ -22,7 +22,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class ConversationalControllerTest extends WebTestCase
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -35,7 +35,7 @@ class ConversationalControllerTest extends WebTestCase
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function tearDown()
     {
@@ -45,7 +45,7 @@ class ConversationalControllerTest extends WebTestCase
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected static function createKernel(array $options = array())
     {

@@ -77,7 +77,7 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setConversationContext(ConversationContext $conversationContext)
     {
@@ -129,7 +129,7 @@ class ConversationListener implements ConversationContextAwareInterface
                         } else {
                             throw new \UnexpectedValueException(sprintf(
                                 'Init method "%s" for pageflow "%s" is not callable.',
-                                get_class($conversationalController) . '::' . $initMethod->getName(),
+                                get_class($conversationalController).'::'.$initMethod->getName(),
                                 $pageflow->getPageflowId()
                             ));
                         }
@@ -153,7 +153,7 @@ class ConversationListener implements ConversationContextAwareInterface
                 if (!in_array($conversation->getCurrentPage()->getPageId(), $reflectionConversationalController->getAcceptablePages($action))) {
                     throw new AccessDeniedHttpException(sprintf(
                         'Controller "%s" should be accessed when the current page is one of [ %s ], the actual page is "%s".',
-                        get_class($conversationalController) . '::' . $action,
+                        get_class($conversationalController).'::'.$action,
                         implode(', ', $reflectionConversationalController->getAcceptablePages($action)),
                         $conversation->getCurrentPage()->getPageId()
                     ));

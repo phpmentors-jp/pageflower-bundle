@@ -24,7 +24,7 @@ class AppKernel extends Kernel
     private $config;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function registerBundles()
     {
@@ -37,7 +37,7 @@ class AppKernel extends Kernel
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {

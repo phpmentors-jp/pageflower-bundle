@@ -34,7 +34,7 @@ class EndableConversationSpecification implements SpecificationInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isSatisfiedBy(EntityInterface $entity)
     {

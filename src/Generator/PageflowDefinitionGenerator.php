@@ -212,7 +212,9 @@ class PageflowDefinitionGenerator
                 throw new \LogicException(sprintf(
                     'The value for annotation "%s" must be a one of [ %s ], "%s" is specified.',
                     'PHPMentors\PageflowerBundle\Annotation\Transition',
-                    implode(', ', array_map(function ($pageId) { return sprintf('"%s"', $pageId); }, $this->pages)),
+                    implode(', ', array_map(function ($pageId) {
+                        return sprintf('"%s"', $pageId);
+                    }, $this->pages)),
                     $transition[1]
                 ));
             }

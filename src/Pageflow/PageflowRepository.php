@@ -23,7 +23,7 @@ class PageflowRepository implements RepositoryInterface
     private $pageflows = array();
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function add(EntityInterface $entity)
     {
@@ -55,7 +55,7 @@ class PageflowRepository implements RepositoryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function remove(EntityInterface $entity)
     {

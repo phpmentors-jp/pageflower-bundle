@@ -23,7 +23,7 @@ class ReflectionConversationalControllerRepository implements RepositoryInterfac
     private $entities = array();
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function add(EntityInterface $entity)
     {
@@ -47,7 +47,7 @@ class ReflectionConversationalControllerRepository implements RepositoryInterfac
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function remove(EntityInterface $entity)
     {

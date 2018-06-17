@@ -35,7 +35,7 @@ class FormTypeConversationExtension extends AbstractTypeExtension implements Con
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -46,7 +46,7 @@ class FormTypeConversationExtension extends AbstractTypeExtension implements Con
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function finishView(FormView $view, FormInterface $conversationForm, array $options)
     {
@@ -66,11 +66,12 @@ class FormTypeConversationExtension extends AbstractTypeExtension implements Con
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getExtendedType()
     {
         return 'Symfony\Component\Form\Extension\Core\Type\FormType';
+
         return 'form';
     }
 }

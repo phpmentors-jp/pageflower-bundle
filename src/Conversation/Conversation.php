@@ -119,7 +119,7 @@ class Conversation implements EntityInterface
     /**
      * @param int $conversationCount
      *
-     * @deprecated Deprecated since version 1.1.0, to be removed in 2.0.0.
+     * @deprecated Deprecated since version 1.1.0, to be removed in 2.0.0
      */
     public function increaseConversationCount()
     {
@@ -139,7 +139,7 @@ class Conversation implements EntityInterface
     /**
      * @return bool
      *
-     * @deprecated Deprecated since version 1.1.0, to be removed in 2.0.0.
+     * @deprecated Deprecated since version 1.1.0, to be removed in 2.0.0
      */
     public function isFirstTime()
     {

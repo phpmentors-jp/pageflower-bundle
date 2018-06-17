@@ -42,7 +42,7 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function clear()
     {
@@ -61,7 +61,7 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -69,7 +69,7 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getStorageKey()
     {
@@ -77,7 +77,7 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function initialize(array &$conversations)
     {

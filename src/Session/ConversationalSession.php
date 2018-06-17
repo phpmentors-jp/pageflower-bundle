@@ -25,7 +25,7 @@ class ConversationalSession extends Session
     private $conversationName;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __construct(SessionStorageInterface $storage = null, AttributeBagInterface $attributes = null, FlashBagInterface $flashes = null, ConversationBag $conversations = null)
     {

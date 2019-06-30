@@ -1,6 +1,7 @@
 /.buildpath
 /.composer/
 /.idea/
+/.php_cs.cache
 /.project
 /.settings/
 /composer.lock
@@ -8,5 +9,6 @@
 /docker-compose.yml
 /docker/php.ini
 /php-cs-fixer.phar
+/var/
 /vendor/
 *.iml

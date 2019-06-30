@@ -114,6 +114,10 @@ class UserRegistrationController extends Controller implements ConversationalCon
      */
     public function inputPostAction(Request $request)
     {
+        if ($request->request->has($this->conversationContext->getConversationParameterName())) {
+            throw new \LogicException('The conversation parameter must not be in the Request object at this time.');
+        }
+
         $form = $this->createForm('PHPMentors\PageflowerBundle\Controller\Bundle\TestBundle\Form\Type\UserRegistrationType', $this->user, array(
             'action' => $this->generateUrl('test_user_registration_input_post'),
             'method' => 'POST',

@@ -102,8 +102,10 @@ class ConversationListener implements ConversationContextAwareInterface
 
                 if ($event->getRequest()->request->has($this->conversationContext->getConversationParameterName())) {
                     $conversationId = $event->getRequest()->request->get($this->conversationContext->getConversationParameterName());
+                    $event->getRequest()->request->remove($this->conversationContext->getConversationParameterName());
                 } elseif ($event->getRequest()->query->has($this->conversationContext->getConversationParameterName())) {
                     $conversationId = $event->getRequest()->query->get($this->conversationContext->getConversationParameterName());
+                    $event->getRequest()->query->remove($this->conversationContext->getConversationParameterName());
                 }
 
                 if (isset($conversationId)) {

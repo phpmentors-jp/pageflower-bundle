@@ -22,7 +22,19 @@ class ReplaceSessionDefinitionPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $container->setDefinition('session', $container->getDefinition('phpmentors_pageflower.conversational_session'));
+        $conversationalSessionDefinition = $container->getDefinition('phpmentors_pageflower.conversational_session');
+        $sessionDefinition = $container->getDefinition('session');
+
+        /*
+         * As of version 3.4.39, the 'session.attribute_bag' and 'session.flash_bag' arguments have been removed from the 'session' definition.
+         * See https://github.com/symfony/symfony/pull/36063 for more details.
+         */
+        if (count($sessionDefinition->getArguments()) == 1) {
+            $conversationalSessionDefinition->replaceArgument(1, null);
+            $conversationalSessionDefinition->replaceArgument(2, null);
+        }
+
+        $container->setDefinition('session', $conversationalSessionDefinition);
         $container->removeDefinition('phpmentors_pageflower.conversational_session');
     }
 }

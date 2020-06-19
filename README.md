@@ -25,13 +25,13 @@ First, add the dependency to `phpmentors/pageflower-bundle` into your `composer.
 Stable version:
 
 ```
-composer require phpmentors/pageflower-bundle "1.4.*"
+composer require phpmentors/pageflower-bundle "1.5.*"
 ```
 
 Development version:
 
 ```
-composer require phpmentors/pageflower-bundle "~1.5@dev"
+composer require phpmentors/pageflower-bundle "~1.6@dev"
 ```
 
 Second, add `PHPMentorsPageflowerBundle` into your bundles to register in `AppKernel::registerBundles()` as the following:

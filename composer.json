@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.9",
+        "php": ">=7.0",
         "doctrine/annotations": "~1.0",
         "phpmentors/domain-kata": "~1.0",
         "phpmentors/stagehand-fsm": "dev-symfony5",

@@ -10,11 +10,17 @@
             "email": "kubo@iteman.jp"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/MasaakiYoshida/stagehand-fsm.git"
+        }
+    ],
     "require": {
         "php": ">=5.3.9",
         "doctrine/annotations": "~1.0",
         "phpmentors/domain-kata": "~1.0",
-        "piece/stagehand-fsm": "~2.6",
+        "piece/stagehand-fsm": "dev-symfony5",
         "symfony/config": "~4.0|~5.0",
         "symfony/console": "~4.0|~5.0",
         "symfony/dependency-injection": "~4.0|~5.0",

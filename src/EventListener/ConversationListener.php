@@ -20,8 +20,10 @@ use PHPMentors\PageflowerBundle\Conversation\ConversationRepository;
 use PHPMentors\PageflowerBundle\Conversation\EndableConversationSpecification;
 use PHPMentors\PageflowerBundle\Pageflow\Pageflow;
 use PHPMentors\PageflowerBundle\Pageflow\PageflowRepository;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Util\SecureRandomInterface;
@@ -85,11 +87,11 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * @param FilterControllerEvent $event
+     * @param ControllerEvent $event
      *
      * @throws \UnexpectedValueException
      */
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(ControllerEvent $event)
     {
         if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
             $controllerName = $event->getRequest()->attributes->get('_controller');
@@ -184,9 +186,9 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * @param FilterResponseEvent $event
+     * @param ResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(ResponseEvent $event)
     {
         if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
             $conversation = $this->conversationContext->getConversation();

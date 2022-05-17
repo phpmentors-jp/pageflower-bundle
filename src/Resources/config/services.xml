@@ -48,6 +48,9 @@
       <argument type="service" id="session.flash_bag"/>
       <argument type="service" id="phpmentors_pageflower.conversation_bag"/>
     </service>
+    <service id="PHPMentors\PageflowerBundle\Session\SessionFactoryConversationBag" decorates="session.factory">
+      <argument type="service" id=".inner"/>
+    </service>
     <service id="phpmentors_pageflower.conversational_app_variable" class="%phpmentors_pageflower.conversational_app_variable.class%" public="false">
       <argument type="service" id="phpmentors_pageflower.conversation_context"/>
     </service>

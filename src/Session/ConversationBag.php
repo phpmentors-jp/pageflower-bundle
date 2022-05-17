@@ -14,9 +14,10 @@ namespace PHPMentors\PageflowerBundle\Session;
 
 use PHPMentors\PageflowerBundle\Conversation\Conversation;
 use PHPMentors\PageflowerBundle\Conversation\ConversationCollectionInterface;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 
-class ConversationBag implements ConversationCollectionInterface, SessionBagInterface
+class ConversationBag extends AttributeBag implements ConversationCollectionInterface
 {
     /**
      * @var array
@@ -38,6 +39,7 @@ class ConversationBag implements ConversationCollectionInterface, SessionBagInte
      */
     public function __construct($storageKey)
     {
+        parent::count($storageKey);
         $this->storageKey = $storageKey;
     }
 

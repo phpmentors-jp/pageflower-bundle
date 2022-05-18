@@ -98,7 +98,7 @@ class ConversationListener implements ConversationContextAwareInterface
             if ($pageflow !== null) {
                 list($conversationalController, $action) = $event->getController();
 
-                $this->conversationRepository->setConversationCollection($event->getRequest()->getSession()->getConversationBag());
+                $this->conversationRepository->setConversationCollection($event->getRequest()->getSession()->getBag('conversations'));
 
                 if ($event->getRequest()->request->has($this->conversationContext->getConversationParameterName())) {
                     $conversationId = $event->getRequest()->request->get($this->conversationContext->getConversationParameterName());

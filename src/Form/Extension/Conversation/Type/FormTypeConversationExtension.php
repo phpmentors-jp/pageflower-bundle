@@ -68,10 +68,8 @@ class FormTypeConversationExtension extends AbstractTypeExtension implements Con
     /**
      * {@inheritdoc}
      */
-    public function getExtendedType()
+    public static function getExtendedTypes(): iterable
     {
-        return 'Symfony\Component\Form\Extension\Core\Type\FormType';
-
-        return 'form';
+        return ['Symfony\Component\Form\Extension\Core\Type\FormType'];
     }
 }

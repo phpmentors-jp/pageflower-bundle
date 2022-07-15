@@ -14,7 +14,7 @@
         "php": ">=7.0",
         "doctrine/annotations": "~1.0",
         "phpmentors/domain-kata": "~1.0",
-        "piece/stagehand-fsm": "~2.6",
+        "phpmentors/stagehand-fsm": "dev-symfony5",
         "symfony/config": "~4.0|~5.0",
         "symfony/console": "~4.0|~5.0",
         "symfony/dependency-injection": "~4.0|~5.0",

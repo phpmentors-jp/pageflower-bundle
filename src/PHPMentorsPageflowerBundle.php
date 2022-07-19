@@ -28,7 +28,6 @@ class PHPMentorsPageflowerBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new GeneratePageflowDefinitionsPass());
-        $container->addCompilerPass(new ReplaceSessionDefinitionPass());
         $container->addCompilerPass(new ReplaceTemplatingGlobalsDefinitionPass());
         $container->addCompilerPass(new ReplaceAppVariableDefinitionPass());
     }

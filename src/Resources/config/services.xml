@@ -8,7 +8,6 @@
     <parameter key="phpmentors_pageflower.conversation_repository.class">PHPMentors\PageflowerBundle\Conversation\ConversationRepository</parameter>
     <parameter key="phpmentors_pageflower.conversational_app_variable.class">PHPMentors\PageflowerBundle\Templating\ConversationalAppVariable</parameter>
     <parameter key="phpmentors_pageflower.conversational_global_variables.class">PHPMentors\PageflowerBundle\Templating\ConversationalGlobalVariables</parameter>
-    <parameter key="phpmentors_pageflower.conversational_session.class">PHPMentors\PageflowerBundle\Session\ConversationalSession</parameter>
     <parameter key="phpmentors_pageflower.endable_conversation_specification.class">PHPMentors\PageflowerBundle\Conversation\EndableConversationSpecification</parameter>
     <parameter key="phpmentors_pageflower.form_type_conversation_extension.class">PHPMentors\PageflowerBundle\Form\Extension\Conversation\Type\FormTypeConversationExtension</parameter>
     <parameter key="phpmentors_pageflower.pageflow.class">PHPMentors\PageflowerBundle\Pageflow\Pageflow</parameter>
@@ -33,7 +32,6 @@
       <argument type="service" id="phpmentors_pageflower.conversation_repository"/>
       <argument type="service" id="phpmentors_pageflower.pageflow_repository"/>
       <argument type="service" id="phpmentors_pageflower.reflection_conversational_controller_repository"/>
-      <argument type="service" id="security.secure_random" on-invalid="ignore"/>
       <argument type="service" id="phpmentors_pageflower.endable_conversation_specification"/>
       <call method="setConversationContext">
         <argument type="service" id="phpmentors_pageflower.conversation_context"/>
@@ -42,11 +40,8 @@
       <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse"/>
     </service>
     <service id="phpmentors_pageflower.conversation_repository" class="%phpmentors_pageflower.conversation_repository.class%" public="false"/>
-    <service id="phpmentors_pageflower.conversational_session" class="%phpmentors_pageflower.conversational_session.class%">
-      <argument type="service" id="session.storage"/>
-      <argument type="service" id="session.attribute_bag"/>
-      <argument type="service" id="session.flash_bag"/>
-      <argument type="service" id="phpmentors_pageflower.conversation_bag"/>
+    <service id="PHPMentors\PageflowerBundle\Session\SessionFactoryConversationBag" decorates="session.factory">
+      <argument type="service" id=".inner"/>
     </service>
     <service id="phpmentors_pageflower.conversational_app_variable" class="%phpmentors_pageflower.conversational_app_variable.class%" public="false">
       <argument type="service" id="phpmentors_pageflower.conversation_context"/>

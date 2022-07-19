@@ -20,8 +20,8 @@ use PHPMentors\PageflowerBundle\Conversation\ConversationRepository;
 use PHPMentors\PageflowerBundle\Conversation\EndableConversationSpecification;
 use PHPMentors\PageflowerBundle\Pageflow\Pageflow;
 use PHPMentors\PageflowerBundle\Pageflow\PageflowRepository;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Util\SecureRandomInterface;
@@ -64,15 +64,13 @@ class ConversationListener implements ConversationContextAwareInterface
      * @param ConversationRepository                       $conversationRepository
      * @param PageflowRepository                           $pageflowRepository
      * @param ReflectionConversationalControllerRepository $reflectionConversationalControllerRepository
-     * @param SecureRandomInterface                        $secureRandom
      * @param EndableConversationSpecification             $endableConversationSpecification
      */
-    public function __construct(ConversationRepository $conversationRepository, PageflowRepository $pageflowRepository, ReflectionConversationalControllerRepository $reflectionConversationalControllerRepository, SecureRandomInterface $secureRandom = null, EndableConversationSpecification $endableConversationSpecification)
+    public function __construct(ConversationRepository $conversationRepository, PageflowRepository $pageflowRepository, ReflectionConversationalControllerRepository $reflectionConversationalControllerRepository, EndableConversationSpecification $endableConversationSpecification)
     {
         $this->conversationRepository = $conversationRepository;
         $this->pageflowRepository = $pageflowRepository;
         $this->reflectionConversationalControllerRepository = $reflectionConversationalControllerRepository;
-        $this->secureRandom = $secureRandom;
         $this->endableConversationSpecification = $endableConversationSpecification;
     }
 
@@ -85,11 +83,11 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * @param FilterControllerEvent $event
+     * @param ControllerEvent $event
      *
      * @throws \UnexpectedValueException
      */
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(ControllerEvent $event)
     {
         if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
             $controllerName = $event->getRequest()->attributes->get('_controller');
@@ -98,7 +96,7 @@ class ConversationListener implements ConversationContextAwareInterface
             if ($pageflow !== null) {
                 list($conversationalController, $action) = $event->getController();
 
-                $this->conversationRepository->setConversationCollection($event->getRequest()->getSession()->getConversationBag());
+                $this->conversationRepository->setConversationCollection($event->getRequest()->getSession()->getBag('conversations'));
 
                 if ($event->getRequest()->request->has($this->conversationContext->getConversationParameterName())) {
                     $conversationId = $event->getRequest()->request->get($this->conversationContext->getConversationParameterName());
@@ -184,9 +182,9 @@ class ConversationListener implements ConversationContextAwareInterface
     }
 
     /**
-     * @param FilterResponseEvent $event
+     * @param ResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(ResponseEvent $event)
     {
         if ($event->getRequestType() == HttpKernelInterface::MASTER_REQUEST) {
             $conversation = $this->conversationContext->getConversation();
@@ -254,6 +252,6 @@ class ConversationListener implements ConversationContextAwareInterface
      */
     private function generateConversationId()
     {
-        return sha1($this->secureRandom === null ? random_bytes(24) : $this->secureRandom->nextBytes(24));
+        return sha1(random_bytes(24));
     }
 }
